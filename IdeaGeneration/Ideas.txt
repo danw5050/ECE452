@@ -1,3 +1,4 @@
 1) App that reminds a dementia patient to take which medicines at what time by ringing an alarm.
 2) An app that informs customers of a restaurant which all items they currently have in stock. For example, a specific Tim Hortons bagel isn’t available at all Tim Hortons. App displays which Tim Hortons nearby has that bagel available and in how much quantity. 
-Not sure if this comes under: apps that require crowd buy-in are not acceptable (e.g., apps that would require large numbers of people to contribute content to be viably useful); 
+Not sure if this comes under: apps that require crowd buy-in are not acceptable (e.g., apps that would require large numbers of people to contribute content to be viably useful)
+3) Anything using the UW-API(https://github.com/uwaterloo/api-documentation#accessing-the-api)
