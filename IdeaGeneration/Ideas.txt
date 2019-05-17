@@ -1,0 +1,2 @@
+1) App that reminds a dementia patient to take which medicines at what time by ringing an alarm.
+2) 
