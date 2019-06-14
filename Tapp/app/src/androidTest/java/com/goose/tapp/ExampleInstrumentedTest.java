@@ -1,4 +1,4 @@
-package com.android.guninkhanna.tapp;
+package com.goose.tapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.android.guninkhanna.tapp", appContext.getPackageName());
+        assertEquals("com.goose.tapp", appContext.getPackageName());
     }
 }

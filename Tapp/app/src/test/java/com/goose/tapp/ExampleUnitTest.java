@@ -1,4 +1,4 @@
-package com.android.guninkhanna.tapp;
+package com.goose.tapp;
 
 import org.junit.Test;
 

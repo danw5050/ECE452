@@ -1,4 +1,4 @@
-package com.android.guninkhanna.tapp;
+package com.goose.tapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
