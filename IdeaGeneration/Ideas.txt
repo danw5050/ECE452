@@ -3,3 +3,10 @@
 Not sure if this comes under: apps that require crowd buy-in are not acceptable (e.g., apps that would require large numbers of people to contribute content to be viably useful)
 3) Anything using the UW-API(https://github.com/uwaterloo/api-documentation#accessing-the-api)
 4) Multiplayer Antakshari game
+5) CloseUp identify what it is app
+6) Hollywood movie dialogues identification
+7) Browsing internet using SMS (Daniel)
+8) VR Pong/Table Tennis idea.
+9) Jack in the box
+10) NFC idea 
+11) 
