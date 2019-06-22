@@ -15,10 +15,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+       setContentView(R.layout.activity_main);
         mTextView = (TextView) findViewById(R.id.title);
-
+/*
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (mNfcAdapter == null) {
@@ -34,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mTextView.setText("Everything works with NFC!");
         }
-
-        handleIntent(getIntent());
-    }
-
-    private void handleIntent(Intent intent) {
-        // TODO: handle Intent
+*/
+        //Intent myIntent = new Intent(MainActivity.this, NFCTriggerActivity.class);
+        //myIntent.putExtra("key", value); //Optional parameters
+        //MainActivity.this.startActivity(myIntent);
     }
 
 }

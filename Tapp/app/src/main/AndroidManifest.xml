@@ -21,6 +21,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".NFCTriggerActivity" android:theme="@style/Theme.Transparent">
 
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
@@ -29,9 +32,6 @@
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
-        </activity>
-
-        <activity android:name=".NFCTriggerActivity">
             <!--intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
