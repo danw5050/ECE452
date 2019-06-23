@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NFCTriggerActivity">
+    tools:context=".NFCListActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -88,6 +88,7 @@
             android:fontFamily="sans-serif-black"
             android:paddingLeft="25dp"
             android:text="Study Table"
+            android:onClick="studyTable"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
