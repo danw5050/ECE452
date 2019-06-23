@@ -25,6 +25,7 @@
             android:layout_height="68dp"
             android:layout_alignParentStart="true"
             android:layout_gravity="start"
+            android:layout_marginStart="-2dp"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +33,29 @@
             app:menu="@menu/navigation_menu" />
 
         <TextView
-            android:layout_width="248dp"
-            android:layout_height="216dp"
-            android:layout_centerInParent="true"
+            android:layout_width="205dp"
+            android:layout_height="219dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="87dp"
+            android:layout_marginBottom="88dp"
             android:text="Opening browser..."
             android:textColor="#000" />
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="228dp"
+            android:layout_below="@+id/navigation"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="131dp"
+            android:layout_marginBottom="329dp"
+            android:textAlignment="center"
+            app:srcCompat="@drawable/logo" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

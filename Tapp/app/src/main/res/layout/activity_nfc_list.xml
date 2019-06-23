@@ -31,13 +31,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/navigation_menu" />
 
-        <TextView
-            android:layout_width="248dp"
-            android:layout_height="216dp"
-            android:layout_centerInParent="true"
-            android:text="The list goes here"
-            android:textColor="#000" />
-
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="228dp"
+            android:layout_below="@+id/navigation"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="79dp"
+            android:layout_marginEnd="122dp"
+            android:layout_marginBottom="356dp"
+            android:textAlignment="center"
+            app:srcCompat="@drawable/logo" />
 
 
     </RelativeLayout>
