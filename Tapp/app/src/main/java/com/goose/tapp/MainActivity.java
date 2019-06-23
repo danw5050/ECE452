@@ -5,6 +5,7 @@ import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mTextView = (TextView) findViewById(R.id.title);
 /*
@@ -39,5 +40,10 @@ public class MainActivity extends AppCompatActivity {
         //myIntent.putExtra("key", value); //Optional parameters
         //MainActivity.this.startActivity(myIntent);
     }
+
+//    protected void login(View view){
+//        Intent myIntent = new Intent(MainActivity.this, NFCTriggerActivity.class);
+//        MainActivity.this.startActivity(myIntent);
+//    }
 
 }
