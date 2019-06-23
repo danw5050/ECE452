@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         //MainActivity.this.startActivity(myIntent);
     }
 
-//    protected void login(View view){
-//        Intent myIntent = new Intent(MainActivity.this, NFCTriggerActivity.class);
-//        MainActivity.this.startActivity(myIntent);
-//    }
+    protected void login(View view){
+        Intent myIntent = new Intent(MainActivity.this, NFCListActivity.class);
+        MainActivity.this.startActivity(myIntent);
+    }
 
 }
