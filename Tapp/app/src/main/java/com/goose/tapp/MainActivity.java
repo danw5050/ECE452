@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_main);
-//        getActionBar().hide();
+        getSupportActionBar().hide();
         mTextView = (TextView) findViewById(R.id.title);
 /*
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
