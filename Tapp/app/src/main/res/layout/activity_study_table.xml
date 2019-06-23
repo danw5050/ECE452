@@ -37,24 +37,22 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="-3dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="3dp"
-            app:srcCompat="@drawable/tapp_banner" />
+            android:layout_alignParentRight="true"
+            android:src="@drawable/banner"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/tasksTitle"
             android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:layout_above="@+id/navigation"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/banner"
+            android:layout_marginBottom="20dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="25dp"
-            android:layout_marginEnd="68dp"
-            android:layout_marginBottom="403dp"
             android:fontFamily="sans-serif-black"
             android:text="Study Table - Triggered Tasks:"
             android:textColor="@android:color/black"
@@ -63,25 +61,22 @@
 
         <RadioButton
             android:id="@+id/UWlearn"
-            android:layout_width="257dp"
-            android:layout_height="72dp"
-            android:layout_above="@+id/navigation"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="137dp"
-            android:layout_marginBottom="333dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tasksTitle"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentLeft="true"
             android:text="Open UW Learn"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/silentMode"
-            android:layout_width="257dp"
-            android:layout_height="72dp"
-            android:layout_above="@+id/navigation"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="137dp"
-            android:layout_marginBottom="271dp"
-            android:text="Silent Mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UWlearn"
+            android:layout_alignParentLeft="true"
+            android:text="Turn on WiFi"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 

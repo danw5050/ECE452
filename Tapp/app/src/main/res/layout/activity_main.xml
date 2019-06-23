@@ -77,7 +77,6 @@
         android:background="@android:color/black"
         android:contentDescription="LOG IN"
         android:text="LOG IN"
-        android:onClick="login"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

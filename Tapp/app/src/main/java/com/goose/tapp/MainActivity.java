@@ -1,9 +1,12 @@
 package com.goose.tapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 import android.widget.Toast;
@@ -19,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mTextView = (TextView) findViewById(R.id.title);
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               login();
+            }
+        });
+
 /*
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -41,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //MainActivity.this.startActivity(myIntent);
     }
 
-    protected void login(View view){
+    protected void login(){
         Intent myIntent = new Intent(MainActivity.this, NFCListActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
