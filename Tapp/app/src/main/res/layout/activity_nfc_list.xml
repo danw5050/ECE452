@@ -21,9 +21,11 @@
         <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/navigation"
+            android:background="#A6A6A6"
             android:layout_width="wrap_content"
             android:layout_height="68dp"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,20 +34,42 @@
             app:menu="@menu/navigation_menu" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="228dp"
-            android:layout_below="@+id/navigation"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="-3dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="3dp"
+            app:srcCompat="@drawable/tapp_banner" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="147dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/navigation"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="79dp"
-            android:layout_marginEnd="122dp"
-            android:layout_marginBottom="356dp"
-            android:textAlignment="center"
-            app:srcCompat="@drawable/logo" />
+            android:layout_marginStart="133dp"
+            android:layout_marginEnd="131dp"
+            android:layout_marginBottom="450dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Your NFC Tags:"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/black"
+            android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="269dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/navigation"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="72dp"
+            android:text="Add NFC Tag" />
 
     </RelativeLayout>
 
