@@ -2,13 +2,11 @@ package com.goose.tapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 public class NFCTriggerActivity extends AppCompatActivity {
 
@@ -22,6 +20,8 @@ public class NFCTriggerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        // {This functionality is temporary for demo purposes}
 
         WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(true);

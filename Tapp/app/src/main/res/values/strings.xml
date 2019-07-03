@@ -1,3 +1,26 @@
 <resources>
+    <!-- Global -->
     <string name="app_name">Tapp</string>
+
+    <!-- Login Page -->
+    <string name="username">Username</string>
+    <string name="username_caps">USERNAME</string>
+
+    <string name="password">Password</string>
+    <string name="password_caps">PASSWORD</string>
+
+    <string name="forgot_password">Forgot Password?</string>
+
+    <string name="log_in_caps">LOG IN</string>
+
+    <string name="sign_up">DONT HAVE AN ACCOUNT? SIGN UP!</string>
+
+    <!-- NFC List Activity -->
+    <string name="nfc_tags_title">Your NFC Tags:</string>
+    <string name="new_tag">Add New Tag</string>
+
+    <!-- NFC Error -->
+    <string name="no_nfc">This device has no NFC</string>
+    <string name="nfc_disabled">This devices NFC is disabled</string>
+    <string name="dismiss_nfc_error">Dismiss</string>
 </resources>

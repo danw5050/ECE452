@@ -11,10 +11,13 @@ public class NFCListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Setup the activity views
         setContentView(R.layout.activity_nfc_list);
         getSupportActionBar().hide();
+        Button studyTable = findViewById(R.id.studyTable);
 
-        Button studyTable = (Button) findViewById(R.id.studyTable);
+        // Setup the activity listeners
         studyTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -23,6 +26,9 @@ public class NFCListActivity extends AppCompatActivity {
         });
     }
 
+    /*
+     * {Remove the temp function}
+     */
     protected void studyTable(){
         Intent myIntent = new Intent(NFCListActivity.this, StudyTableActivity.class);
         NFCListActivity.this.startActivity(myIntent);

@@ -1,29 +1,30 @@
 package com.goose.tapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.nfc.NfcAdapter;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextView;
     private NfcAdapter mNfcAdapter;
+    private ConstraintLayout loginActivityView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Setup the activity views
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        mTextView = (TextView) findViewById(R.id.title);
-        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginActivityView = findViewById(R.id.loginActivityView);
+        Button loginButton = findViewById(R.id.loginButton);
 
+        // Setup listeners
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,31 +32,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-/*
+        // Check the status of NFC in device
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (mNfcAdapter == null) {
-            // Stop here, we definitely need NFC
-            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-
+            // No NFC in device
+            nfcError(getApplicationContext().getString(R.string.no_nfc));
+        } else if (!mNfcAdapter.isEnabled()) {
+            // NFC disabled
+            nfcError(getApplicationContext().getString(R.string.nfc_disabled));
         }
-
-        if (!mNfcAdapter.isEnabled()) {
-            mTextView.setText("NFC is disabled.");
-        } else {
-            mTextView.setText("Everything works with NFC!");
-        }
-*/
-        //Intent myIntent = new Intent(MainActivity.this, NFCTriggerActivity.class);
-        //myIntent.putExtra("key", value); //Optional parameters
-        //MainActivity.this.startActivity(myIntent);
     }
 
+    /*
+     * login called when user successfully logs in
+     */
     protected void login(){
         Intent myIntent = new Intent(MainActivity.this, NFCListActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
 
+    /*
+     * nfcError called when there is an error or problem with the NFC status on the users mobile device
+     */
+    public void  nfcError(String errorType) {
+        Snackbar snackbar;
+        snackbar = Snackbar
+                .make(loginActivityView, errorType, Snackbar.LENGTH_INDEFINITE)
+                .setAction(getApplicationContext().getString(R.string.dismiss_nfc_error), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {}
+                });
+        snackbar.show();
+    }
 }
