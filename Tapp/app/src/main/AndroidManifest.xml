@@ -29,6 +29,7 @@
 
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
+                <!--data android:mimeType="text/plain" /-->
             </intent-filter>
 
             <meta-data
