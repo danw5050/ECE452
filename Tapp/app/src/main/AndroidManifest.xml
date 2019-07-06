@@ -45,6 +45,9 @@
         </activity>
         <activity android:name=".StudyTableActivity">
         </activity>
+        <activity android:name=".AddNewTagActivity">
+        </activity>
+
 
     </application>
 

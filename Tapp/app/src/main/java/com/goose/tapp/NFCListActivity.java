@@ -30,7 +30,7 @@ public class NFCListActivity extends AppCompatActivity {
      * {Remove the temp function}
      */
     protected void studyTable(){
-        Intent myIntent = new Intent(NFCListActivity.this, StudyTableActivity.class);
+        Intent myIntent = new Intent(NFCListActivity.this, AddNewTagActivity.class);
         NFCListActivity.this.startActivity(myIntent);
     }
 }

@@ -23,4 +23,6 @@
     <string name="no_nfc">This device has no NFC</string>
     <string name="nfc_disabled">This devices NFC is disabled</string>
     <string name="dismiss_nfc_error">Dismiss</string>
+    <string name="taskList">Select a task</string>
+    <string name="tagName">Enter the tag name</string>
 </resources>

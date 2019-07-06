@@ -25,7 +25,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             android:background="#A6A6A6"
-            app:layout_constraintBottom_toTopOf="@+id/title"
+            app:layout_constraintBottom_toTopOf="@+id/addConfirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,27 +35,80 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/banner"
             android:scaleType="centerCrop"
             android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/tagsTitle"
-            android:layout_below="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/banner"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-black"
-            android:text="@string/nfc_tags_title"
+            android:text="@string/new_tag"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/black"
             android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/tagName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/tagsTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="@string/tagName"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/selectTask"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/tagName"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="-3dp"
+            android:layout_marginBottom="20dp"
+            android:background="#A6A6A6"
+            android:drawableBottom="?attr/dividerHorizontal"
+            android:fontFamily="sans-serif-black"
+            android:paddingLeft="25dp"
+            android:text="@string/taskList"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/confirmTag"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_above="@+id/navigation"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="85dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginEnd="84dp"
+            android:layout_marginRight="85dp"
+            android:layout_marginBottom="161dp"
+            android:background="@android:color/black"
+            android:text="Confirm"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
+
 
     </RelativeLayout>
 
