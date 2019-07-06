@@ -10,15 +10,50 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
+import android.util.Log;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter mNfcAdapter;
     private ConstraintLayout loginActivityView;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String nfcId = "nfcid1asdf";
+
+        FirebaseDatabase.getInstance().getReference()
+                .child("NFCIds")
+                .child((nfcId))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        @SuppressWarnings("unchecked")
+                        Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                        String link = (String) map.get("open_browser");
+                        if(link != null){
+                            // openBrowser browser = new openBrowser(link);
+                        }
+                        Log.d("test",link);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        /*Do Nothing*/
+                    }
+                });
+
+        runActions actionInstance = new runActions(nfcId);
 
         // Setup the activity views
         setContentView(R.layout.activity_main);
