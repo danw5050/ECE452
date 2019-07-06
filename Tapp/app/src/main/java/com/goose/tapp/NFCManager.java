@@ -12,7 +12,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
-import android.support.design.widget.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Locale;
@@ -94,12 +93,6 @@ public class NFCManager {
         }
     }
 
-    public NdefMessage createUriMessage(String content, String type) {
-        NdefRecord record = NdefRecord.createUri(type + content);
-        NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
-        return msg;
-
-    }
 
     public NdefMessage createTextMessage(String content) {
         try {
@@ -124,11 +117,4 @@ public class NFCManager {
         return null;
     }
 
-    public NdefMessage createExternalMessage(String content) {
-        NdefRecord externalRecord = NdefRecord.createExternal("com.survivingwithandroid", "data", content.getBytes());
-
-        NdefMessage ndefMessage = new NdefMessage(new NdefRecord[] { externalRecord });
-
-        return ndefMessage;
-    }
 }

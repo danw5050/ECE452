@@ -4,25 +4,19 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.nfc.tech.Ndef;
-import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
-import java.io.ByteArrayOutputStream;
-import java.util.Locale;
 
 public class NFCWriteActivity extends AppCompatActivity {
 
     TextView writingStatus;
-    NFCManager nfcMger;
+
+    private NdefMessage nfcId = null;
+    NFCManager nfcManager;
     Tag currentTag;
-    private NdefMessage message = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +24,17 @@ public class NFCWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nfc_write);
         writingStatus = findViewById(R.id.writingStatus);
 
-        nfcMger = new NFCManager(this);
+        nfcManager = new NFCManager(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        message =  nfcMger.createTextMessage("my test!");
+        // Create the nfcId to write to NFC
+        nfcId =  nfcManager.createTextMessage("asdfasdf!");
 
+        // Create intent listener to catch NFC tag tap
         Intent nfcIntent = new Intent(this, getClass());
         nfcIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, nfcIntent, 0);
@@ -52,51 +48,28 @@ public class NFCWriteActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onPause() {
+  /*  @Override
+    public void onPause() {
         super.onPause();
+
+        // Disable the intent listener
+        nfcManager.disableDispatch();
     }
-
-
-
+*/
+    /*
+     * onNewIntent triggered on NFC Tap
+     */
     @Override
     public void onNewIntent(Intent intent) {
         // It is the time to write the tag
         currentTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        if (message != null) {
+        if (nfcId != null) {
             writingStatus.setText("NFC Tripped");
-            nfcMger.writeTag(currentTag, message);
+            nfcManager.writeTag(currentTag, nfcId);
 
         }
         else {
-            // Handle intent
-
-        }
-    }
-
-
-    public void writeTag(Tag tag, NdefMessage message)  {
-        if (tag != null) {
-            try {
-                Ndef ndefTag = Ndef.get(tag);
-                if (ndefTag == null) {
-                    // Let's try to format the Tag in NDEF
-                    NdefFormatable nForm = NdefFormatable.get(tag);
-                    if (nForm != null) {
-                        nForm.connect();
-                        nForm.format(message);
-                        nForm.close();
-                    }
-                }
-                else {
-                    ndefTag.connect();
-                    ndefTag.writeNdefMessage(message);
-                    ndefTag.close();
-                }
-            }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
+            writingStatus.setText("NFC Message is not valid");
         }
     }
 }
