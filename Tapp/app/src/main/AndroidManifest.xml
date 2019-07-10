@@ -47,6 +47,7 @@
         <activity android:name=".StudyTableActivity">
         </activity>
         <activity android:name=".NFCWriteActivity">
+        <activity android:name=".QRCodeGenerationActivity">
         </activity>
 
     </application>
