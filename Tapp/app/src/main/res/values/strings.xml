@@ -9,13 +9,23 @@
     <string name="password">Password</string>
     <string name="password_caps">PASSWORD</string>
 
+    <string name="email">Email</string>
+    <string name="email_caps">EMAIL</string>
+
     <string name="forgot_password">Forgot Password?</string>
 
     <string name="log_in_caps">LOG IN</string>
 
-    <string name="sign_up">DONT HAVE AN ACCOUNT? SIGN UP!</string>
+    <string name="reset_caps">RESET MY PASSWORD</string>
+
+    <string name="sign_up">NO ACCOUNT? SIGN UP!</string>
+
+    <string name= "sign_up_real">SIGN UP</string>
+
+    <string name="terms">Accept terms and conditions</string>
 
     <!-- NFC List Activity -->
+
     <string name="nfc_tags_title">Your NFC Tags:</string>
     <string name="new_tag">Add New Tag</string>
 
@@ -23,8 +33,4 @@
     <string name="no_nfc">This device has no NFC</string>
     <string name="nfc_disabled">This devices NFC is disabled</string>
     <string name="dismiss_nfc_error">Dismiss</string>
-
-    <!-- NFC Triggered Activity -->
-    <string name="nfc_unable_read">Unable to read the contents of the NFC</string>
-    <string name="nfc_unable_parse">Unable to parse the contents of the NFC</string>
 </resources>
