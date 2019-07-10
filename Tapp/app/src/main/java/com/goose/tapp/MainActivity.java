@@ -8,9 +8,9 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.view.View;
-import android.util.Log;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DataSnapshot;
@@ -25,13 +25,23 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout loginActivityView;
     private DatabaseReference mDatabase;
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Declare a database
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // Get the NFC ID from Daniel's code
         String nfcId = "nfcid1asdf";
 
+        // Read data from the database
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
                 .child((nfcId))
@@ -40,11 +50,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         @SuppressWarnings("unchecked")
                         Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                        String link = (String) map.get("open_browser");
-                        if(link != null){
-                            // openBrowser browser = new openBrowser(link);
+                        boolean wifiOn = (Boolean) map.get("wifi_on");
+                        String urlLink = (String) map.get("open_browser");
+                        if(wifiOn){
+                            Log.d("wifi", wifiOn?"true":"false");
                         }
-                        Log.d("test",link);
+                        if(urlLink != null){
+                            openBrowser browser = new openBrowser(getApplicationContext(),urlLink);
+                        }
                     }
 
                     @Override
@@ -52,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                         /*Do Nothing*/
                     }
                 });
-
-        runActions actionInstance = new runActions(nfcId);
 
         // Setup the activity views
         setContentView(R.layout.activity_main);

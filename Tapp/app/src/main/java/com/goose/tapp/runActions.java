@@ -7,5 +7,4 @@ public class runActions {
     public runActions(String nfcTag) {
         Log.d("TEST", nfcTag);
     }
-
 }
