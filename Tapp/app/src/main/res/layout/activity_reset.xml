@@ -25,7 +25,7 @@
         android:layout_width="228dp"
         android:layout_height="50dp"
         android:background="@android:color/white"
-        android:contentDescription="@string/Username"
+        android:contentDescription="@string/username"
         android:fontFamily="sans-serif"
         android:hint="@string/username_caps"
         android:textAlignment="center"
