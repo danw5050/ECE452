@@ -33,4 +33,8 @@
     <string name="no_nfc">This device has no NFC</string>
     <string name="nfc_disabled">This devices NFC is disabled</string>
     <string name="dismiss_nfc_error">Dismiss</string>
+
+    <!-- NFC Triggered Activity -->
+    <string name="nfc_unable_read">Unable to read the contents of the NFC</string>
+    <string name="nfc_unable_parse">Unable to parse the contents of the NFC</string>
 </resources>
