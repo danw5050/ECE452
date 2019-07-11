@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
      * login called when user successfully logs in
      */
     protected void login(){
-        Intent myIntent = new Intent(MainActivity.this, NFCListActivity.class);
+        Intent myIntent = new Intent(MainActivity.this, QRCodeGenerationActivity.class);
         MainActivity.this.startActivity(myIntent);
     }
 
