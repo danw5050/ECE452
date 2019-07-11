@@ -3,6 +3,7 @@ package com.goose.tapp;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -15,7 +16,13 @@ public class QRCodeGenerationActivity extends AppCompatActivity {
     public final static int WHITE = 0xFFFFFFFF;
     public final static int BLACK = 0xFF000000;
     public final static int WIDTH = 500;
-    public final static String STR = "ANURAG COMPUTER SHIT";
+
+    /*
+    * TODO: CALL QRCodeGenerationActivity through this approach:
+    *    Intent myIntent = new Intent(MainActivity.this, QRCodeGenerationActivity.class);
+    *    myIntent.putExtra("EXTRA_QR_STRING", "{Id of NFC}");
+     *   MainActivity.this.startActivity(myIntent);
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +32,16 @@ public class QRCodeGenerationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qr_code_generator);
         ImageView imageView = findViewById(R.id.qrCode);
 
+        // Get the string from activity launching intent
+        String qrString = getIntent().getStringExtra("EXTRA_QR_STRING");
+        if (qrString == null || qrString.isEmpty() ) {
+            Log.e("QRCodeGeneration", "Failed to create QR Generation - EXTRA_QR_STRING is empty");
+            return;
+        }
+
         // Generate the QR code image
         try {
-            Bitmap bitmap = generateQR(STR);
+            Bitmap bitmap = generateQR(qrString);
             imageView.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -53,7 +67,7 @@ public class QRCodeGenerationActivity extends AppCompatActivity {
             }
         }
 
-        // Create the 
+        // Create the bitmap to be used to the QR Code
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, WIDTH, 0, 0, w, h);
         return bitmap;
