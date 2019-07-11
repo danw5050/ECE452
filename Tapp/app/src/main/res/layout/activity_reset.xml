@@ -16,7 +16,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
-        android:src="@drawable/TAPP_Logo"
+        android:src="@drawable/t_logo"
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="80dp" />
 

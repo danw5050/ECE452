@@ -16,14 +16,14 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
-        android:src="@drawable/TAPP_Logo"
+        android:src="@drawable/t_logo"
         tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="80dp" />
+        tools:layout_editor_absoluteY="80dp"/>
 
     <EditText
         android:id="@+id/email"
         android:layout_width="230dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="356dp"
         android:background="@android:color/white"
         android:contentDescription="@string/email_caps"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <EditText
         android:id="@+id/username"
@@ -50,7 +50,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-
         tools:layout_editor_absoluteY="408dp" />
 
     <EditText
@@ -68,18 +67,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-    <TextView
+
+    <Button
         android:id="@+id/signUp"
-        android:layout_width="264dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="116dp"
-        android:text="@string/sign_up"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+    android:layout_width="230dp"
+    android:layout_height="60dp"
+    android:layout_marginBottom="80dp"
+        android:textSize="18sp"
+        android:background="@android:color/black"
+    android:contentDescription="@string/sign_up_real"
+    android:text="@string/sign_up_real"
+    android:textAlignment="center"
+    android:textColor="@android:color/white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.496"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" />
 
 
 

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudyTableActivity">
+    tools:context=".StudyTableActivity"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.android.com/apk/res-auto ">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,23 +29,21 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             android:background="#A6A6A6"
-            app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/navigation_menu" />
 
+
         <ImageView
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/banner"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:layout_marginBottom="10dp"/>
-
+            android:src="@drawable/tapp_banner"
+            />、
+        <!--  android:layout_centerInParent="true" -->
         <TextView
             android:id="@+id/tasksTitle"
             android:layout_width="wrap_content"
@@ -77,8 +77,45 @@
             android:layout_below="@+id/UWlearn"
             android:layout_alignParentLeft="true"
             android:text="Turn on WiFi"
+            android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/spotifyOpener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/silentMode"
+            android:layout_alignParentLeft="true"
+            android:text="Open Spotify"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/bluetoothOpener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spotifyOpener"
+            android:layout_alignParentLeft="true"
+            android:text="Open Bluetooth"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/clockopener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bluetoothOpener"
+            android:layout_alignParentLeft="true"
+            android:text="Open Clock"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+        <!--android:layout_below="@+id/OpenSpotify"-->
 
 
     </RelativeLayout>
