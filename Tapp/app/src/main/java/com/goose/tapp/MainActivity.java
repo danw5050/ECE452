@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import com.google.firebase.auth.FirebaseUser;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,9 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter mNfcAdapter;
-    private ConstraintLayout mainActivityRootView;
+    private RelativeLayout mainActivityRootView;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authListener;
+
 
 
     @Override
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         Button studyTable = findViewById(R.id.studyTable);
+        Button logout = findViewById(R.id.logout);
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
         // Ensure user is logged in
@@ -64,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 studyTable();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
             }
         });
     }
@@ -104,6 +115,4 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
-
-    // TODO: add logout: auth.signOut();
 }
