@@ -8,9 +8,17 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 public class NFCWriteActivity extends AppCompatActivity {
+
+    /*
+     * TODO: CALL NFCWriteActivity through this approach:
+     *    Intent myIntent = new Intent(MainActivity.this, NFCWriteActivity.class);
+     *    myIntent.putExtra("EXTRA_NFC_STRING", "{Id of NFC you want to write}");
+     *   MainActivity.this.startActivity(myIntent);
+     */
 
     TextView writingStatus;
 
@@ -24,15 +32,22 @@ public class NFCWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nfc_write);
         writingStatus = findViewById(R.id.writingStatus);
 
+        // Get the string from activity launching intent
+        String nfcValue = getIntent().getStringExtra("EXTRA_NFC_STRING");
+        if (nfcValue == null || nfcValue.isEmpty() ) {
+            Log.e("NFCWriteActivity", "Failed to write to NFC - EXTRA_NFC_STRING is empty");
+            return;
+        }
+
+        // Create the NFCId to write
+        nfcManager.createTextMessage(nfcValue);
+
         nfcManager = new NFCManager(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Create the nfcId to write to NFC
-        nfcId =  nfcManager.createTextMessage("asdfasdf!");
 
         // Create intent listener to catch NFC tag tap
         Intent nfcIntent = new Intent(this, getClass());
