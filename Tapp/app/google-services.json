@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "394376342439",
+    "firebase_url": "https://tappp-52854.firebaseio.com",
+    "project_id": "tappp-52854",
+    "storage_bucket": "tappp-52854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394376342439:android:b158e6ac2e78ec6d",
+        "android_client_info": {
+          "package_name": "com.goose.tapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394376342439-0mquada2etsf039k6acmobljcgkjnk64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu2FGOPkAwWQTcVD8MEiCkrGiQIFiz568"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394376342439-0mquada2etsf039k6acmobljcgkjnk64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
