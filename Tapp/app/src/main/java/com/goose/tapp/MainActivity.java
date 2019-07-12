@@ -72,9 +72,8 @@ public class MainActivity extends AppCompatActivity {
      * {Remove the temp function}
      */
     protected void studyTable(){
-        auth.signOut();
-        //Intent myIntent = new Intent(MainActivity.this, StudyTableActivity.class);
-        //MainActivity.this.startActivity(myIntent);
+        Intent myIntent = new Intent(MainActivity.this, StudyTableActivity.class);
+        MainActivity.this.startActivity(myIntent);
     }
 
 
@@ -105,4 +104,6 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+    // TODO: add logout: auth.signOut();
 }
