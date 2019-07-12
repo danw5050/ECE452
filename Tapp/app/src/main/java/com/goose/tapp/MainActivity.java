@@ -1,20 +1,25 @@
 package com.goose.tapp;
 
 import android.content.Intent;
-import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
-import android.os.Parcelable;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
+import com.google.firebase.auth.FirebaseUser;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter mNfcAdapter;
-    private ConstraintLayout loginActivityView;
+    private ConstraintLayout mainActivityRootView;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener authListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +28,24 @@ public class MainActivity extends AppCompatActivity {
         // Setup the activity views
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        loginActivityView = findViewById(R.id.loginActivityView);
-        Button loginButton = findViewById(R.id.loginButton);
+        Button studyTable = findViewById(R.id.studyTable);
+        mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
-        // Setup listeners
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        // Ensure user is logged in
+        auth = FirebaseAuth.getInstance();
+
+        authListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onClick(View v) {
-               login();
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
             }
-        });
+        };
 
         // Check the status of NFC in device
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -44,15 +57,26 @@ public class MainActivity extends AppCompatActivity {
             // NFC disabled
             nfcError(getApplicationContext().getString(R.string.nfc_disabled));
         }
+
+
+        // Setup the activity listeners
+        studyTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                studyTable();
+            }
+        });
     }
 
     /*
-     * login called when user successfully logs in
+     * {Remove the temp function}
      */
-    protected void login(){
-        Intent myIntent = new Intent(MainActivity.this, NFCListActivity.class);
-        MainActivity.this.startActivity(myIntent);
+    protected void studyTable(){
+        auth.signOut();
+        //Intent myIntent = new Intent(MainActivity.this, StudyTableActivity.class);
+        //MainActivity.this.startActivity(myIntent);
     }
+
 
     /*
      * nfcError called when there is an error or problem with the NFC status on the users mobile device
@@ -60,11 +84,25 @@ public class MainActivity extends AppCompatActivity {
     public void  nfcError(String errorType) {
         Snackbar snackbar;
         snackbar = Snackbar
-                .make(loginActivityView, errorType, Snackbar.LENGTH_INDEFINITE)
+                .make(mainActivityRootView, errorType, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getApplicationContext().getString(R.string.dismiss_nfc_error), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {}
                 });
         snackbar.show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
     }
 }

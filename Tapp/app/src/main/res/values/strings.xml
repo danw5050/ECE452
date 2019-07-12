@@ -24,6 +24,26 @@
 
     <string name="terms">Accept terms and conditions</string>
 
+    <string name="minimum_password">Password must be 6 or more characters long</string>
+
+    <string name="auth_failed">Failed to authenticate</string>
+
+
+    <string name="hint_new_email">New Email</string>
+    <string name="btn_change">Change</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
+    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="action_sign_in_short">Register</string>
+
+
     <!-- NFC List Activity -->
 
     <string name="nfc_tags_title">Your NFC Tags:</string>
