@@ -35,37 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Declare a database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        // Get the NFC ID from Daniel's code
-        String nfcId = "nfcid1asdf";
-
-        // Read data from the database
-        FirebaseDatabase.getInstance().getReference()
-                .child("NFCIds")
-                .child((nfcId))
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        @SuppressWarnings("unchecked")
-                        Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                        boolean wifiOn = (Boolean) map.get("wifi_on");
-                        String urlLink = (String) map.get("open_browser");
-                        if(wifiOn){
-                            Log.d("wifi", wifiOn?"true":"false");
-                        }
-                        if(urlLink != null){
-                            openBrowser browser = new openBrowser(getApplicationContext(),urlLink);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        /*Do Nothing*/
-                    }
-                });
-
         // Setup the activity views
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
