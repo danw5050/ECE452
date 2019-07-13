@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
-public class openBrowser extends AppCompatActivity {
-    // Constructor that accepts a link to open a browser
-    public openBrowser(Context context, String link) {
+public class openBrowser extends AppCompatActivity implements Strategy{
+    @Override
+    public void doTheSpecifiedTask(Context context, String link, boolean wifiOn) {
+        if(link == null || link.length() == 0 || link.isEmpty()){
+            return;
+        }
         // Add https otherwise the code fails to run
         if (!link.startsWith("http://") && !link.startsWith("https://")){
             link = "https://" + link;

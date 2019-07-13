@@ -72,8 +72,8 @@ public class NFCTriggerActivity extends AppCompatActivity {
                 NFCActionTextView.setText(nfcTriggerMessage);
             }
         }
+        NFCActionTextView.setText(nfcTriggerMessage);
     }
-
 
     private void workWithNFCId(String nfcTriggerMessage){
         // Get the NFC ID from the client.
@@ -91,10 +91,11 @@ public class NFCTriggerActivity extends AppCompatActivity {
                         boolean wifiOn = (Boolean) map.get("wifi_on");
                         String urlLink = (String) map.get("open_browser");
 
-                        wifiToggling wifiToggler = new wifiToggling((getApplicationContext()), wifiOn);
-                        if(urlLink != null){
-                            openBrowser browser = new openBrowser(getApplicationContext(),urlLink);
-                        }
+                        ContextObject contextObject1 = new ContextObject(new wifiToggling());
+                        contextObject1.executeStrategy(getApplicationContext(), urlLink, wifiOn);
+
+                        ContextObject contextObject2 = new ContextObject(new openBrowser());
+                        contextObject2.executeStrategy(getApplicationContext(), urlLink, wifiOn);
                     }
 
                     @Override
@@ -103,6 +104,7 @@ public class NFCTriggerActivity extends AppCompatActivity {
                     }
                 });
     }
+
     /*
      * NdefToString used to get payload string from NdefMessage
      */
