@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class usersNFCListRecyclerViewAdapter extends RecyclerView.Adapter<usersNFCListRecyclerViewAdapter.ViewHolder> {
 
     Context context;
-    List<StudentDetails> MainImageUploadInfoList;
+    List<NFCDetails> MainImageUploadInfoList;
 
-    public RecyclerViewAdapter(Context context, List<StudentDetails> TempList) {
+    public usersNFCListRecyclerViewAdapter(Context context, List<NFCDetails> TempList) {
 
         this.MainImageUploadInfoList = TempList;
 
@@ -24,7 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_items, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nfc_list_item, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(view);
 
@@ -34,11 +34,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        StudentDetails studentDetails = MainImageUploadInfoList.get(position);
+        NFCDetails studentDetails = MainImageUploadInfoList.get(position);
 
-        holder.StudentNameTextView.setText(studentDetails.getName());
+        holder.nfcNameTextView.setText(studentDetails.getName());
 
-        holder.StudentNumberTextView.setText(studentDetails.getNumber());
+        holder.nfcTagLocationTextView.setText(studentDetails.getTagLocation());
 
     }
 
@@ -50,16 +50,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView StudentNameTextView;
-        public TextView StudentNumberTextView;
+        public TextView nfcNameTextView;
+        public TextView nfcTagLocationTextView;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            StudentNameTextView = (TextView) itemView.findViewById(R.id.ShowStudentNameTextView);
-
-            StudentNumberTextView = (TextView) itemView.findViewById(R.id.ShowStudentNumberTextView);
+            nfcNameTextView = (TextView) itemView.findViewById(R.id.nfcNameTextView);
+            nfcTagLocationTextView = (TextView) itemView.findViewById(R.id.nfcTagLocationTextView);
         }
     }
 }

@@ -8,16 +8,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView nfcListListView;
 
 
+    //Users NFC RecyclerView
+    List<NFCDetails> userNFCList = new ArrayList<>();
+    RecyclerView.Adapter usersNFCListAdapter;
 
-
+    // Firebase Database
     DatabaseReference databaseReference;
-    List<StudentDetails> list = new ArrayList<>();
-    RecyclerView.Adapter adapter ;
-
 
     // Firebase Authentication
     private FirebaseAuth auth;
@@ -112,20 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        // Get all nfc tags belonging to user
         databaseReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
+                // Go through every NFC belonging to user
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
+                    // Find details for every NFC belonging to the user
                     databaseReference.child("NFCIds").child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
-
-                            list.add(studentDetails);
-                            Log.d("nfcRecyclerView", studentDetails.getName());
-                            adapter.notifyDataSetChanged();
+                            // Add the nfc tag details
+                            NFCDetails nfcDetails = dataSnapshot.getValue(NFCDetails.class);
+                            userNFCList.add(nfcDetails);
+                            usersNFCListAdapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -135,21 +131,14 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                 }
-
-
-               // progressDialog.dismiss();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-               // progressDialog.dismiss();
-
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
 
-        adapter = new RecyclerViewAdapter(MainActivity.this, list);
-        nfcListListView.setAdapter(adapter);
+        usersNFCListAdapter = new usersNFCListRecyclerViewAdapter(MainActivity.this, userNFCList);
+        nfcListListView.setAdapter(usersNFCListAdapter);
 
     }
 
