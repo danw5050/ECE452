@@ -1,11 +1,22 @@
 package com.goose.tapp;
 
-public class NFCDetails {
+import java.io.Serializable;
 
+public class NFCDetails implements Serializable {
+
+    private String nfcID;
     private String name;
     private String tagLocation;
 
     public NFCDetails() { }
+
+    public String getNfcID() {
+        return nfcID;
+    }
+
+    public void setNfcID(String nfcID) {
+        this.nfcID = nfcID;
+    }
 
     public String getName() {
         return name;

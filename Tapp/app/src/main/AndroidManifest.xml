@@ -49,11 +49,11 @@
         </activity>
         <activity android:name=".ResetPasswordActivity">
         </activity>
-        <activity android:name=".StudyTableActivity">
-        </activity>
         <activity android:name=".NFCWriteActivity">
         </activity>
         <activity android:name=".QRCodeGenerationActivity">
+        </activity>
+        <activity android:name=".NFCDetailsActivity">
         </activity>
 
     </application>

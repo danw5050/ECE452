@@ -121,7 +121,12 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             // Add the nfc tag details
                             NFCDetails nfcDetails = dataSnapshot.getValue(NFCDetails.class);
+                            nfcDetails.setNfcID(dataSnapshot.getKey());
+
+                            // Add the nfc tag to the list of of all nfc tags
                             userNFCList.add(nfcDetails);
+
+                            // Update the recyclerview with the new nfc tag
                             usersNFCListRecyclerViewAdapter.notifyDataSetChanged();
                         }
 
@@ -144,8 +149,10 @@ public class MainActivity extends AppCompatActivity {
         usersNFCListRecyclerViewAdapter.setOnItemClickListener(new UsersNFCListRecyclerViewAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Log.d("test", "onItemClick position: " + position);
-
+                // Open details about the clicked NFC tag
+                Intent myIntent = new Intent(MainActivity.this, NFCDetailsActivity.class);
+                myIntent.putExtra("NFC_DETAILS",  userNFCList.get(position));
+                MainActivity.this.startActivity(myIntent);
             }
 
             @Override
@@ -172,15 +179,6 @@ public class MainActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
-
-    /*
-     * {Remove the temp function}
-     */
-    protected void studyTable(){
-        Intent myIntent = new Intent(MainActivity.this, StudyTableActivity.class);
-        MainActivity.this.startActivity(myIntent);
-    }
-
 
     /*
      * nfcError called when there is an error or problem with the NFC status on the users mobile device
