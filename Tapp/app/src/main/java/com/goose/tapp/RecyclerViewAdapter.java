@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.StudentNameTextView.setText(studentDetails.getName());
 
-        holder.StudentNumberTextView.setText(studentDetails.getName());
+        holder.StudentNumberTextView.setText(studentDetails.getNumber());
 
     }
 

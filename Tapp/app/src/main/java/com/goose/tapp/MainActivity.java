@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
 
+
         // Get the user currently logged in
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -106,33 +107,36 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Setup firebase
-        //nfcListListView.setHasFixedSize(true);
-
+        //Show all nfc tags belonging to user
         nfcListListView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("student");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                    StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
+                    databaseReference.child("NFCIds").child(dataSnapshot.getKey()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
 
-                    list.add(studentDetails);
-                    Log.d("nfcRecyclerView", studentDetails.getName());
+                            list.add(studentDetails);
+                            Log.d("nfcRecyclerView", studentDetails.getName());
+                            adapter.notifyDataSetChanged();
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-
-
-
+                        }
+                    });
 
                 }
 
-                adapter.notifyDataSetChanged();
+
                // progressDialog.dismiss();
             }
 
