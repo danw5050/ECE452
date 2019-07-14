@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -30,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
     // Required global layouts
     private RelativeLayout mainActivityRootView;
-    private RecyclerView nfcListListView;
+    private RecyclerView nfcListRecyclerView;
 
 
     //Users NFC RecyclerView
     List<NFCDetails> userNFCList = new ArrayList<>();
-    RecyclerView.Adapter usersNFCListAdapter;
+    UsersNFCListRecyclerViewAdapter usersNFCListRecyclerViewAdapter;
 
     // Firebase Database
     DatabaseReference databaseReference;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         // Setup the activity views
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        nfcListListView = findViewById(R.id.nfcListListView);
+        nfcListRecyclerView = findViewById(R.id.nfcListListView);
         Button logout = findViewById(R.id.logout);
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Show all nfc tags belonging to user
-        nfcListListView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        nfcListRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                             // Add the nfc tag details
                             NFCDetails nfcDetails = dataSnapshot.getValue(NFCDetails.class);
                             userNFCList.add(nfcDetails);
-                            usersNFCListAdapter.notifyDataSetChanged();
+                            usersNFCListRecyclerViewAdapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -137,9 +138,23 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) { }
         });
 
-        usersNFCListAdapter = new usersNFCListRecyclerViewAdapter(MainActivity.this, userNFCList);
-        nfcListListView.setAdapter(usersNFCListAdapter);
+        // Create the adapter for nfcListRecyclerView
+        usersNFCListRecyclerViewAdapter = new UsersNFCListRecyclerViewAdapter(MainActivity.this, userNFCList);
+        // Add onclick listener for items in nfcListRecyclerView
+        usersNFCListRecyclerViewAdapter.setOnItemClickListener(new UsersNFCListRecyclerViewAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Log.d("test", "onItemClick position: " + position);
 
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Log.d("test", "onItemLongClick pos: " + position);
+            }
+        });
+
+        nfcListRecyclerView.setAdapter(usersNFCListRecyclerViewAdapter);
     }
 
 
