@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true"/>
@@ -56,6 +58,8 @@
         <activity android:name=".NFCDetailsActivity">
         </activity>
         <activity android:name=".NewNFCActivity">
+        </activity>
+        <activity android:name=".QRCodeScannerActivity">
         </activity>
 
     </application>

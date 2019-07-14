@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         nfcListRecyclerView = findViewById(R.id.nfcListListView);
         Button logout = findViewById(R.id.logout);
         Button addNewTag = findViewById(R.id.addNewTag);
+        Button scanQRCode = findViewById(R.id.scanQRCode);
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
 
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         // Get the user currently logged in
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+
+        // If the user is not logged in show login page
+        if (user == null) {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+            return;
+        }
 
         // Ensure user is logged in
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -109,6 +117,14 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
 
+        scanQRCode.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, QRCodeScannerActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
 
         //Show all nfc tags belonging to user
         nfcListRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -131,8 +147,20 @@ public class MainActivity extends AppCompatActivity {
                             NFCDetails nfcDetails = dataSnapshot.getValue(NFCDetails.class);
                             nfcDetails.setNfcID(dataSnapshot.getKey());
 
-                            // Add the nfc tag to the list of of all nfc tags
-                            userNFCList.add(nfcDetails);
+                            // Replace the nfc tag from list if already exists
+                            Boolean updated = false;
+                            for (int i = 0; i < userNFCList.size(); i++) {
+                                if (userNFCList.get(i).getNfcID() == nfcDetails.getNfcID()) {
+                                    userNFCList.set(i, nfcDetails);
+                                    updated = true;
+                                    break;
+                                }
+                            }
+
+                            // Add the nfc tag to the list of of all nfc tags if not updated
+                            if (!updated) {
+                                userNFCList.add(nfcDetails);
+                            }
 
                             // Update the recyclerview with the new nfc tag
                             usersNFCListRecyclerViewAdapter.notifyDataSetChanged();

@@ -119,7 +119,7 @@
 
         <Button
             android:id="@+id/addNewTag"
-            android:layout_above="@id/logout"
+            android:layout_above="@id/scanQRCode"
             android:layout_width="match_parent"
 
             android:layout_height="64dp"
@@ -133,6 +133,13 @@
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/scanQRCode"
+            android:layout_above="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan QR Code"/>
 
         <Button
             android:id="@+id/logout"

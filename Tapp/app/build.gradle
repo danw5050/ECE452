@@ -33,6 +33,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.firebaseui:firebase-ui-database:5.0.0'
+
+
+    implementation 'com.google.android.gms:play-services-vision:15.0.0'
+
 }
 
+apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
