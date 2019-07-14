@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         nfcListRecyclerView = findViewById(R.id.nfcListListView);
         Button logout = findViewById(R.id.logout);
+        Button addNewTag = findViewById(R.id.addNewTag);
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
 
@@ -100,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addNewTag.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, NewNFCActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        } );
 
 
         //Show all nfc tags belonging to user

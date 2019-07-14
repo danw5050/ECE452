@@ -29,10 +29,12 @@ public class NFCDetailsActivity  extends AppCompatActivity {
 
         // Populate activity with nfcDetails
         nfcTitle.setText(nfcDetails.getTagLocation());
+
+        // Add onClickListeners
         showQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Show QR Code for NFC Tag
+                // Show QR Code for NFC Tag to share
                 Intent myIntent = new Intent(NFCDetailsActivity.this, QRCodeGenerationActivity.class);
                 myIntent.putExtra("EXTRA_QR_STRING", nfcDetails.getNfcID());
                 NFCDetailsActivity.this.startActivity(myIntent);

@@ -55,6 +55,8 @@
         </activity>
         <activity android:name=".NFCDetailsActivity">
         </activity>
+        <activity android:name=".NewNFCActivity">
+        </activity>
 
     </application>
 

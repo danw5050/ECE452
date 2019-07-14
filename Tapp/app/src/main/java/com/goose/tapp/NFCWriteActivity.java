@@ -40,9 +40,8 @@ public class NFCWriteActivity extends AppCompatActivity {
         }
 
         // Create the NFCId to write
-        nfcManager.createTextMessage(nfcValue);
-
         nfcManager = new NFCManager(this);
+        nfcId = nfcManager.createTextMessage(nfcValue);
     }
 
     @Override
@@ -81,7 +80,6 @@ public class NFCWriteActivity extends AppCompatActivity {
         if (nfcId != null) {
             writingStatus.setText("NFC Tripped");
             nfcManager.writeTag(currentTag, nfcId);
-
         }
         else {
             writingStatus.setText("NFC Message is not valid");

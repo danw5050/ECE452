@@ -17,13 +17,6 @@ public class QRCodeGenerationActivity extends AppCompatActivity {
     public final static int BLACK = 0xFF000000;
     public final static int WIDTH = 500;
 
-    /*
-    * TODO: CALL QRCodeGenerationActivity through this approach:
-    *    Intent myIntent = new Intent(MainActivity.this, QRCodeGenerationActivity.class);
-    *    myIntent.putExtra("EXTRA_QR_STRING", "{Id of NFC}");
-     *   MainActivity.this.startActivity(myIntent);
-    */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/newTagName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:hint="NAME"
+        android:layout_margin="20dp"/>
+
+    <EditText
+        android:id="@+id/newTagLocation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/newTagName"
+        android:hint="TAG LOCATION"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/saveNewNFC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newTagLocation"
+        android:text="Save NFC"
+        android:layout_margin="20dp"
+        android:padding="6dp"/>
+
+</RelativeLayout>
