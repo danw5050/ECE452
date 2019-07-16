@@ -8,12 +8,22 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 public class NFCTriggerActivity extends AppCompatActivity {
 
 
     TextView NFCActionTextView;
+    static {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +31,7 @@ public class NFCTriggerActivity extends AppCompatActivity {
 
         // Set up the activity
         setContentView(R.layout.activity_nfc_trigger);
-        NFCActionTextView = findViewById(R.id.NFCActionTextView);
+        // NFCActionTextView = findViewById(R.id.NFCActionTextView);
 
         // Get the text from NFC Tag
         nfcFromIntent(getIntent());
@@ -49,24 +59,47 @@ public class NFCTriggerActivity extends AppCompatActivity {
                 NdefMessage msg = (NdefMessage) rawMsgs[0];
                 try {
                     nfcTriggerMessage = ndefToString(msg);
-
-                    /*
-                     * TODO: Add a function here that uses NFC Tag ID to launch required functions
-                     */
+                    workWithNFCId(nfcTriggerMessage);
 
                 } catch (UnsupportedEncodingException e) {
                     nfcTriggerMessage = getApplicationContext().getString(R.string.nfc_unable_parse);
+                    // NFCActionTextView.setText(nfcTriggerMessage);
                 }
 
             } else {
                 // No contents within the NFC Tag
                 nfcTriggerMessage = getApplicationContext().getString(R.string.nfc_unable_read);
+                // NFCActionTextView.setText(nfcTriggerMessage);
             }
         }
-
-        NFCActionTextView.setText(nfcTriggerMessage);
     }
 
+    private void workWithNFCId(String nfcTriggerMessage){
+        // Get the NFC ID from the client.
+        String nfcId = nfcTriggerMessage;
+
+        // Read data from the database
+        FirebaseDatabase.getInstance().getReference()
+                .child("NFCIds")
+                .child((nfcId))
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Map<String, Object> settings = (Map<String, Object>) dataSnapshot.getValue();
+
+                        ContextObject contextObject1 = new ContextObject(new wifiToggling());
+                        contextObject1.executeStrategy(getApplicationContext(), settings);
+
+                        ContextObject contextObject2 = new ContextObject(new openBrowser());
+                        contextObject2.executeStrategy(getApplicationContext(), settings);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        /*Do Nothing*/
+                    }
+                });
+    }
     /*
      * NdefToString used to get payload string from NdefMessage
      */
