@@ -1,10 +1,13 @@
 package com.goose.tapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,6 +136,50 @@ public class MainActivity extends AppCompatActivity {
 
         //Show all nfc tags belonging to user
         nfcListRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        // Anurag Test
+        FirebaseDatabase.getInstance().getReference()
+                .child("NFCIds")
+                .child("WTNCVCUIT9")
+                .child("settings")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Map<String, Object> settings = (Map) dataSnapshot.getValue();
+
+                        ContextObject contextObject = new ContextObject(new wifiToggling());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new openBrowser());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new SetVolumeLevel());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new BluetoothToggling());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new OpenExternalApplication());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                        alertDialog.setTitle("Unable to launch. Please log into the application first.");
+                        alertDialog.setMessage(databaseError.getDetails());
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
+
+        // End test
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -135,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
                 // Go through every NFC belonging to user
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 

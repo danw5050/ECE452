@@ -1,12 +1,16 @@
 package com.goose.tapp;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DataSnapshot;
@@ -14,15 +18,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class NFCTriggerActivity extends AppCompatActivity {
 
 
     TextView NFCActionTextView;
-    static {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-    }
+
+    static Context openContext;
 
 
     @Override
@@ -33,9 +37,9 @@ public class NFCTriggerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nfc_trigger);
         // NFCActionTextView = findViewById(R.id.NFCActionTextView);
 
+        openContext = getApplicationContext();
         // Get the text from NFC Tag
         nfcFromIntent(getIntent());
-
     }
 
     /*
@@ -77,26 +81,44 @@ public class NFCTriggerActivity extends AppCompatActivity {
     private void workWithNFCId(String nfcTriggerMessage){
         // Get the NFC ID from the client.
         String nfcId = nfcTriggerMessage;
-
         // Read data from the database
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
-                .child((nfcId))
+                .child(nfcId)
+                .child("settings")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Map<String, Object> settings = (Map<String, Object>) dataSnapshot.getValue();
 
-                        ContextObject contextObject1 = new ContextObject(new wifiToggling());
-                        contextObject1.executeStrategy(getApplicationContext(), settings);
+                        ContextObject contextObject = new ContextObject(new wifiToggling());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
 
-                        ContextObject contextObject2 = new ContextObject(new openBrowser());
-                        contextObject2.executeStrategy(getApplicationContext(), settings);
+                        contextObject = new ContextObject(new openBrowser());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new SetVolumeLevel());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new BluetoothToggling());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new OpenExternalApplication());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        /*Do Nothing*/
+                        AlertDialog alertDialog = new AlertDialog.Builder(NFCTriggerActivity.this).create();
+                        alertDialog.setTitle("Unable to launch. Please log into the application first.");
+                        alertDialog.setMessage(databaseError.getDetails());
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
                     }
                 });
     }

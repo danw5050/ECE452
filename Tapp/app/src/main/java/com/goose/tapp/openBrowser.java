@@ -10,7 +10,14 @@ import java.util.Map;
 public class openBrowser extends AppCompatActivity implements Strategy{
     @Override
     public void doTheSpecifiedTask(Context context, Map<String, Object> settings) {
-        String link = (String) settings.get("open_browser");
+        String link = "";
+        for(Map.Entry<String, Object>entry : settings.entrySet()){
+            if(entry.getKey().equals("browser")){
+                String [] separated = entry.getValue().toString().split("=");
+                link = separated[1].substring(0, separated[1].length() - 1);
+            }
+        }
+
         if(link == null || link.length() == 0 || link.isEmpty()){
             return;
         }
