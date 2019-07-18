@@ -31,6 +31,7 @@ public class CheckBoxModal {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                listener.modalCancel();
                 dialog.cancel();
             }
         });
@@ -40,6 +41,7 @@ public class CheckBoxModal {
 
     public interface CheckBoxModalListener {
         void modalResponse(Boolean state);
+        void modalCancel();
     }
 
     public void setCheckBoxModalListener(CheckBoxModalListener listener) {

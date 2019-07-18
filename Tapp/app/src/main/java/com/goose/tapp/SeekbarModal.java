@@ -3,30 +3,29 @@ package com.goose.tapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.InputType;
-import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
-public class TextModal {
+public class SeekbarModal {
 
-    private TextModalListener listener;
+    private SeekbarModalListener listener;
 
-    TextModal(Context context, String title, String hint, String initialText) {
+    SeekbarModal(Context context, String title, int initialState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
 
         // Set up the text input
-        final EditText input = new EditText(context);
-        input.setHint(hint);
-        input.setText(initialText);
-
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        final SeekBar input = new SeekBar(context);
+        input.setMax(100);
+        input.setProgress(initialState);
         builder.setView(input);
 
         // Set up the confirmation buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                listener.modalResponse(input.getText().toString());
+                listener.modalResponse(input.getProgress());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -40,12 +39,12 @@ public class TextModal {
         builder.show();
     }
 
-    public interface TextModalListener {
-        void modalResponse(String text);
+    public interface SeekbarModalListener {
+        void modalResponse(int state);
         void modalCancel();
     }
 
-    public void setTextModalListener(TextModalListener listener) {
+    public void setSeekbarModalListener(SeekbarModalListener listener) {
         this.listener = listener;
     }
 }

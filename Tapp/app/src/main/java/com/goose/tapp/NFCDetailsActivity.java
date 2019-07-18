@@ -42,7 +42,7 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             }
         });
 
-/**
+
         TextModal object = new TextModal(this, "Title", "hint", "asd");
         object.setTextModalListener(new TextModal.TextModalListener() {
             @Override
@@ -50,19 +50,42 @@ public class NFCDetailsActivity  extends AppCompatActivity {
                 Toast toast=Toast.makeText(getApplicationContext(),data, Toast.LENGTH_SHORT);
                 toast.show();
             }
+
+            @Override
+            public void modalCancel() {
+
+            }
         });
-   **/
 
-
-        CheckBoxModal object = new CheckBoxModal(this, "Title", "status" , true);
-        object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+        CheckBoxModal object2 = new CheckBoxModal(this, "Title", "status" , true);
+        object2.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
             @Override
             public void modalResponse(Boolean state) {
                 Toast toast=Toast.makeText(getApplicationContext(),"a" + state, Toast.LENGTH_SHORT);
                 toast.show();
             }
+
+            @Override
+            public void modalCancel() {
+
+            }
         });
 
+
+
+        SeekbarModal object3 = new SeekbarModal(this, "Title", 40);
+        object3.setSeekbarModalListener(new SeekbarModal.SeekbarModalListener() {
+            @Override
+            public void modalResponse(int state) {
+                Toast toast=Toast.makeText(getApplicationContext(),"a" + state, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            @Override
+            public void modalCancel() {
+
+            }
+        });
 
 
     }
