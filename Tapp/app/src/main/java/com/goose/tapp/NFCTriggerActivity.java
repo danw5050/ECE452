@@ -103,6 +103,9 @@ public class NFCTriggerActivity extends AppCompatActivity {
                         contextObject = new ContextObject(new BluetoothToggling());
                         contextObject.executeStrategy(getApplicationContext(), settings);
 
+                        contextObject = new ContextObject(new DoNotDisturb());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
                         contextObject = new ContextObject(new OpenExternalApplication());
                         contextObject.executeStrategy(getApplicationContext(), settings);
                     }
