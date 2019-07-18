@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NFCDetailsActivity  extends AppCompatActivity {
 
@@ -40,6 +41,30 @@ public class NFCDetailsActivity  extends AppCompatActivity {
                 NFCDetailsActivity.this.startActivity(myIntent);
             }
         });
+
+/**
+        TextModal object = new TextModal(this, "Title", "hint", "asd");
+        object.setTextModalListener(new TextModal.TextModalListener() {
+            @Override
+            public void modalResponse(String data) {
+                Toast toast=Toast.makeText(getApplicationContext(),data, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+   **/
+
+
+        CheckBoxModal object = new CheckBoxModal(this, "Title", "status" , true);
+        object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+            @Override
+            public void modalResponse(Boolean state) {
+                Toast toast=Toast.makeText(getApplicationContext(),"a" + state, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+
+
     }
 
 }
