@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CheckBox;
+import android.preference.PreferenceManager;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+
 
 public class NFCDetailsActivity  extends AppCompatActivity {
 
@@ -28,6 +33,7 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             return;
         }
 
+
         // Populate activity with nfcDetails
         nfcTitle.setText(nfcDetails.getTagLocation());
 
@@ -42,6 +48,7 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             }
         });
 
+        /**
 
         TextModal object = new TextModal(this, "Title", "hint", "asd");
         object.setTextModalListener(new TextModal.TextModalListener() {
@@ -87,7 +94,92 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             }
         });
 
+*/
+
+        CheckBox UWlearn =  findViewById(R.id.UWlearn);
+        boolean checked = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("checkBox1", false);
+        UWlearn.setChecked(checked);
+
+        CheckBox silentMode = findViewById(R.id.silentMode);
+        boolean checked2 = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("checkBox2", false);
+        silentMode.setChecked(checked2);
+
+        CheckBox spotifyOpener = findViewById(R.id.spotifyOpener);
+        boolean checked3 = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("checkBox3", false);
+        spotifyOpener.setChecked(checked3);
+
+        CheckBox bluetoothOpener = findViewById(R.id.bluetoothOpener);
+        boolean checked4 = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("checkBox4", false);
+        bluetoothOpener.setChecked(checked4);
+
+        CheckBox clockOpener = findViewById(R.id.clockopener);
+        boolean checked5 = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("checkBox5", false);
+        clockOpener.setChecked(checked5);
 
     }
 
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.UWlearn:
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean("checkBox1", checked).commit();
+                break;
+        }
+    }
+
+    public void onCheckboxClicked2(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.silentMode:
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean("checkBox2", checked).commit();
+                break;
+        }
+    }
+
+    public void onCheckboxClicked3(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.spotifyOpener:
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean("checkBox3", checked).commit();
+                break;
+        }
+    }
+
+    public void onCheckboxClicked4(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.bluetoothOpener:
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean("checkBox4", checked).commit();
+                break;
+        }
+    }
+
+    public void onCheckboxClicked5(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.clockopener:
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean("checkBox5", checked).commit();
+                break;
+        }
+    }
 }
