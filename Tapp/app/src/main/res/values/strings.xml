@@ -57,4 +57,8 @@
     <!-- NFC Triggered Activity -->
     <string name="nfc_unable_read">Unable to read the contents of the NFC</string>
     <string name="nfc_unable_parse">Unable to parse the contents of the NFC</string>
+    <string name="tagName">Tag Name</string>
+    <string name="tagLocation">Tag Location</string>
+    <string name="saveNFC">Save NFC</string>
+    <string name="taskList">Tasks</string>
 </resources>
