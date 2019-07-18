@@ -37,7 +37,7 @@ public class NewNFCActivity  extends AppCompatActivity {
                 // Set the details for NFC TAG
                 NFCDetails nfcDetails = new NFCDetails();
                 nfcDetails.setName(newTagName.getText().toString());
-                nfcDetails.setTagLocation(newTagName.getText().toString());
+                nfcDetails.setTagLocation(newTagLocation.getText().toString());
 
                 // Save Details within firebase
                 databaseReference = FirebaseDatabase.getInstance().getReference();
