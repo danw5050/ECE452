@@ -27,6 +27,7 @@ public class NewNFCActivity  extends AppCompatActivity {
         newTagName = findViewById(R.id.newTagName);
         newTagLocation = findViewById(R.id.newTagLocation);
         saveNewNFC = findViewById(R.id.saveNewNFC);
+        getSupportActionBar().hide();
 
         saveNewNFC.setOnClickListener(new View.OnClickListener() {
             @Override
