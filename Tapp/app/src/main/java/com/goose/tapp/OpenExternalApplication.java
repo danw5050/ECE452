@@ -31,7 +31,7 @@ public class OpenExternalApplication extends AppCompatActivity implements  Strat
             context.startActivity(intent);
         }
         catch (Exception ex){
-            // Show an alert dialog
+            // Show a toast message
         }
     }
 }

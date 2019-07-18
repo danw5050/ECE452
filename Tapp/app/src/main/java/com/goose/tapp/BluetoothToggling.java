@@ -25,7 +25,7 @@ public class BluetoothToggling extends AppCompatActivity implements Strategy {
         if(status){
             BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (mBluetoothAdapter == null) {
-                // Device does not support Bluetooth, show alert dialog
+                // Device does not support Bluetooth, show toast message
                 return;
             }
             // Enable bluetooth

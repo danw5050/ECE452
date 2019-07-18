@@ -136,50 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Show all nfc tags belonging to user
         nfcListRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        // Anurag Test
-        FirebaseDatabase.getInstance().getReference()
-                .child("NFCIds")
-                .child("WTNCVCUIT9")
-                .child("settings")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Map<String, Object> settings = (Map) dataSnapshot.getValue();
-
-                        ContextObject contextObject = new ContextObject(new wifiToggling());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
-
-                        contextObject = new ContextObject(new openBrowser());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
-
-                        contextObject = new ContextObject(new SetVolumeLevel());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
-
-                        contextObject = new ContextObject(new BluetoothToggling());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
-
-                        contextObject = new ContextObject(new OpenExternalApplication());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                        alertDialog.setTitle("Unable to launch. Please log into the application first.");
-                        alertDialog.setMessage(databaseError.getDetails());
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
-                    }
-                });
-
-        // End test
-
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
