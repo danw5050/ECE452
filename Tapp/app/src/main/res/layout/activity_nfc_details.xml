@@ -51,6 +51,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="25dp"
+            android:gravity="center"
             android:fontFamily="sans-serif-black"
             android:text="Populate NFC Title"
             android:textColor="@android:color/black"
@@ -67,12 +68,13 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="25dp"
             android:fontFamily="sans-serif-black"
+            android:gravity="center"
             android:text="Study Table - Triggered Tasks:"
             android:textColor="@android:color/black"
             android:textColorHighlight="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/UWlearn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,9 +83,10 @@
             android:layout_alignParentLeft="true"
             android:text="Open UW Learn"
             android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked"
             android:textSize="18sp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/silentMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,9 +95,10 @@
             android:text="Turn on WiFi"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked2"
             android:textSize="18sp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/spotifyOpener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,9 +107,10 @@
             android:text="Open Spotify"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked3"
             android:textSize="18sp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/bluetoothOpener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,9 +119,10 @@
             android:text="Open Bluetooth"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked4"
             android:textSize="18sp" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/clockopener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,6 +131,7 @@
             android:text="Open Clock"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked5"
             android:textSize="18sp" />
 
 
