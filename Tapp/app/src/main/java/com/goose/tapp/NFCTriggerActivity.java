@@ -105,6 +105,12 @@ public class NFCTriggerActivity extends AppCompatActivity {
 
                         contextObject = new ContextObject(new OpenExternalApplication());
                         contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new PortraitModeToggling());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
+
+                        contextObject = new ContextObject(new ScreenBrightness());
+                        contextObject.executeStrategy(getApplicationContext(), settings);
                     }
 
                     @Override
