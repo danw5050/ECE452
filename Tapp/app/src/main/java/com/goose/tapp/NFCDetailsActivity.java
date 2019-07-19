@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -17,10 +20,14 @@ import android.widget.CheckBox;
 import android.preference.PreferenceManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class NFCDetailsActivity  extends AppCompatActivity {
 
+    private FirebaseAuth auth;
+    public static FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +37,8 @@ public class NFCDetailsActivity  extends AppCompatActivity {
         TextView nfcTitle = findViewById(R.id.nfcTitle);
         Button showQRCode = findViewById(R.id.showQRCode);
         getSupportActionBar().hide();
+
+        auth = FirebaseAuth.getInstance();
 
         // Get the nfcDetails to populate activity
         final NFCDetails nfcDetails = (NFCDetails)getIntent().getSerializableExtra("NFC_DETAILS");
@@ -50,6 +59,32 @@ public class NFCDetailsActivity  extends AppCompatActivity {
                 Intent myIntent = new Intent(NFCDetailsActivity.this, QRCodeGenerationActivity.class);
                 myIntent.putExtra("EXTRA_QR_STRING", nfcDetails.getNfcID());
                 NFCDetailsActivity.this.startActivity(myIntent);
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent intent_home = new Intent(NFCDetailsActivity.this, MainActivity.class);
+                        NFCDetailsActivity.this.startActivity(intent_home);
+                        break;
+                    case R.id.action_scanQR:
+                        Intent intent_scan = new Intent(NFCDetailsActivity.this, QRCodeScannerActivity.class);
+                        NFCDetailsActivity.this.startActivity(intent_scan);
+                        break;
+                    case R.id.action_logout:
+                        auth.signOut();
+                        user = auth.getCurrentUser();
+                        if (user == null) {
+                            startActivity(new Intent(NFCDetailsActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        break;
+                }
+                return true;
             }
         });
 

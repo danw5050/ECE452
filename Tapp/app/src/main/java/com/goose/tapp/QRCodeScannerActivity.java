@@ -66,6 +66,7 @@ public class QRCodeScannerActivity  extends AppCompatActivity {
         cameraPreview = findViewById(R.id.cameraPreview);
         txtResult = findViewById(R.id.txtResult);
         addQRNFC = findViewById(R.id.addQRNFC);
+        getSupportActionBar().hide();
 
         // Add on click listeners
         addQRNFC.setOnClickListener(  new View.OnClickListener() {
