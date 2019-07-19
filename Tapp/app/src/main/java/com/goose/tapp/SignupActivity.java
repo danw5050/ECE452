@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+// Modeled after: https://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
+
 public class SignupActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
