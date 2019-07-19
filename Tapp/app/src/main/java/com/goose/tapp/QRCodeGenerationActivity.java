@@ -41,6 +41,8 @@ public class QRCodeGenerationActivity extends AppCompatActivity {
         }
     }
 
+    // Modeled after: https://codinginfinite.com/qrcode-generator-and-reader-android-example/
+
     Bitmap generateQR(String qrString) throws WriterException {
         BitMatrix result;
         try {

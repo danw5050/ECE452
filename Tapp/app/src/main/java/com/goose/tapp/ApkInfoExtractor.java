@@ -11,6 +11,8 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
+// Modeled after: https://stackoverflow.com/questions/28814622/how-can-i-display-installed-apps-in-a-recyclerview
+
 public class ApkInfoExtractor {
 
     Context context1;

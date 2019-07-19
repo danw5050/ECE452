@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+// Modeled after: https://www.androidhive.info/2016/06/android-getting-started-firebase-simple-login-registration-auth/
+
 public class ResetPasswordActivity extends AppCompatActivity {
 
     private EditText inputEmail;
