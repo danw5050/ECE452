@@ -34,10 +34,10 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder>{
 
             super(view);
 
-            cardView = (CardView) view.findViewById(R.id.card_view);
-            imageView = (ImageView) view.findViewById(R.id.imageview);
-            textView_App_Name = (TextView) view.findViewById(R.id.Apk_Name);
-            textView_App_Package_Name = (TextView) view.findViewById(R.id.Apk_Package_Name);
+            cardView = view.findViewById(R.id.card_view);
+            imageView =  view.findViewById(R.id.imageview);
+            textView_App_Name = view.findViewById(R.id.Apk_Name);
+            textView_App_Package_Name = view.findViewById(R.id.Apk_Package_Name);
         }
     }
 
