@@ -1,11 +1,16 @@
 package com.goose.tapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CheckBox;
@@ -48,7 +53,22 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             }
         });
 
-        /**
+     //SAMPLE OF HOW TO USE EACH OF THE CUSTOM MODALS
+
+   /*     AppsModal object3 = new AppsModal(this, "Select Application");
+        object3.setAppsModalListener(new AppsModal.AppsModalListener() {
+            @Override
+            public void modalResponse(String appName, String packageName) {
+                Toast toast=Toast.makeText(getApplicationContext(),"a" + appName, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            @Override
+            public void modalCancel() {
+
+            }
+        });
+
 
         TextModal object = new TextModal(this, "Title", "hint", "asd");
         object.setTextModalListener(new TextModal.TextModalListener() {
@@ -80,8 +100,8 @@ public class NFCDetailsActivity  extends AppCompatActivity {
 
 
 
-        SeekbarModal object3 = new SeekbarModal(this, "Title", 40);
-        object3.setSeekbarModalListener(new SeekbarModal.SeekbarModalListener() {
+        SeekbarModal object4 = new SeekbarModal(this, "Title", 40);
+        object4.setSeekbarModalListener(new SeekbarModal.SeekbarModalListener() {
             @Override
             public void modalResponse(int state) {
                 Toast toast=Toast.makeText(getApplicationContext(),"a" + state, Toast.LENGTH_SHORT);
@@ -92,9 +112,9 @@ public class NFCDetailsActivity  extends AppCompatActivity {
             public void modalCancel() {
 
             }
-        });
+        }); */
 
-*/
+
 
         CheckBox UWlearn =  findViewById(R.id.UWlearn);
         boolean checked = PreferenceManager.getDefaultSharedPreferences(this)
