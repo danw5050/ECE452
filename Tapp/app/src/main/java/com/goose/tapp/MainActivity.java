@@ -1,5 +1,7 @@
 package com.goose.tapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -199,8 +201,29 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onItemLongClick(int position, View v) {
-                Log.d("test", "onItemLongClick pos: " + position);
+            public void onItemLongClick(final int position, View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                // Delete the NFC from recyclerview and firebase
+                                databaseReference.child("Users").child(user.getUid()).child(userNFCList.get(position).getNfcID()).removeValue();
+                                userNFCList.remove(position);
+                                usersNFCListRecyclerViewAdapter.notifyDataSetChanged();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Delete this NFC?")
+                        .setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("Cancel", dialogClickListener)
+                        .show();
             }
         });
 
