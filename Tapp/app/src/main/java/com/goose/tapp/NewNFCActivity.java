@@ -2,11 +2,16 @@ package com.goose.tapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -17,6 +22,8 @@ public class NewNFCActivity  extends AppCompatActivity {
     TextView newTagName;
     TextView newTagLocation;
     Button saveNewNFC;
+    private FirebaseAuth auth;
+    public static FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,33 @@ public class NewNFCActivity  extends AppCompatActivity {
         newTagLocation = findViewById(R.id.newTagLocation);
         saveNewNFC = findViewById(R.id.saveNewNFC);
         getSupportActionBar().hide();
+        auth = FirebaseAuth.getInstance();
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent intent_home = new Intent(NewNFCActivity.this, MainActivity.class);
+                        NewNFCActivity.this.startActivity(intent_home);
+                        break;
+                    case R.id.action_scanQR:
+                        Intent intent_scan = new Intent(NewNFCActivity.this, QRCodeScannerActivity.class);
+                        NewNFCActivity.this.startActivity(intent_scan);
+                        break;
+                    case R.id.action_logout:
+                        auth.signOut();
+                        user = auth.getCurrentUser();
+                        if (user == null) {
+                            startActivity(new Intent(NewNFCActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
         saveNewNFC.setOnClickListener(new View.OnClickListener() {
             @Override
