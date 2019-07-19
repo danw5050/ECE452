@@ -3,18 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.goose.tapp">
 
-
-
     <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions"  />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
@@ -26,48 +27,48 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".StudyFeaturesActivity"
+            android:label="@string/title_activity_study_features"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".NFCTriggerActivity" android:theme="@style/Theme.Transparent" android:configChanges="orientation">
-
+        <activity
+            android:name=".NFCTriggerActivity"
+            android:configChanges="orientation"
+            android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
-                <!--data android:mimeType="text/plain" /-->
+                <!-- data android:mimeType="text/plain" / -->
             </intent-filter>
 
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter" />
-            <!--intent-filter>
+            <!--
+            intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:mimeType="text/plain" />
-            </intent-filter-->
+            </intent-filter
+            -->
         </activity>
-        <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".SignupActivity">
-        </activity>
-        <activity android:name=".ResetPasswordActivity">
-        </activity>
-        <activity android:name=".NFCWriteActivity">
-        </activity>
-        <activity android:name=".QRCodeGenerationActivity">
-        </activity>
-        <activity android:name=".NFCDetailsActivity">
-        </activity>
-        <activity android:name=".NewNFCActivity">
-        </activity>
-        <activity android:name=".QRCodeScannerActivity">
-        </activity>
-
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".NFCWriteActivity"></activity>
+        <activity android:name=".QRCodeGenerationActivity"></activity>
+        <activity android:name=".NFCDetailsActivity"></activity>
+        <activity android:name=".NewNFCActivity"></activity>
+        <activity android:name=".QRCodeScannerActivity"></activity>
     </application>
 
 </manifest>
