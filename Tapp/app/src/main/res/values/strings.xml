@@ -20,7 +20,7 @@
 
     <string name="sign_up">NO ACCOUNT? SIGN UP!</string>
 
-    <string name= "sign_up_real">SIGN UP</string>
+    <string name="sign_up_real">SIGN UP</string>
 
     <string name="terms">Accept terms and conditions</string>
 
@@ -61,4 +61,5 @@
     <string name="tagLocation">Tag Location</string>
     <string name="saveNFC">Save NFC</string>
     <string name="taskList">Tasks</string>
+    <string name="title_activity_study_features">StudyFeaturesActivity</string>
 </resources>

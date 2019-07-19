@@ -67,13 +67,13 @@ public class NFCTriggerActivity extends AppCompatActivity {
 
                 } catch (UnsupportedEncodingException e) {
                     nfcTriggerMessage = getApplicationContext().getString(R.string.nfc_unable_parse);
-                    // NFCActionTextView.setText(nfcTriggerMessage);
+                    NFCActionTextView.setText(nfcTriggerMessage);
                 }
 
             } else {
                 // No contents within the NFC Tag
                 nfcTriggerMessage = getApplicationContext().getString(R.string.nfc_unable_read);
-                // NFCActionTextView.setText(nfcTriggerMessage);
+                NFCActionTextView.setText(nfcTriggerMessage);
             }
         }
     }
@@ -81,7 +81,9 @@ public class NFCTriggerActivity extends AppCompatActivity {
     private void workWithNFCId(String nfcTriggerMessage){
         // Get the NFC ID from the client.
         String nfcId = nfcTriggerMessage;
-        // Read data from the database
+        // Check if the NFC ID exists in the database first
+
+        // Read data from the database in Firebase
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
                 .child(nfcId)
@@ -89,22 +91,41 @@ public class NFCTriggerActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() == null){
+                            Toast.makeText(openContext,"This NFC has not been registered with our systems yet.",Toast.LENGTH_SHORT).show();
+
+                            Intent myIntent = new Intent(openContext, NewNFCActivity.class);
+                            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            openContext.startActivity(myIntent);
+
+                            return;
+                        }
+
                         Map<String, Object> settings = (Map<String, Object>) dataSnapshot.getValue();
 
                         ContextObject contextObject = new ContextObject(new wifiToggling());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
+                        contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new openBrowser());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
+                        contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new SetVolumeLevel());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
+                        contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new BluetoothToggling());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
+                        contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new OpenExternalApplication());
-                        contextObject.executeStrategy(getApplicationContext(), settings);
+                        contextObject.executeStrategy(openContext, settings);
+
+                        contextObject = new ContextObject(new PortraitModeToggling());
+                        contextObject.executeStrategy(openContext, settings);
+
+                        contextObject = new ContextObject(new ScreenBrightness());
+                        contextObject.executeStrategy(openContext, settings);
+
+                        contextObject = new ContextObject(new StudyFeature());
+                        contextObject.executeStrategy(openContext, settings);
                     }
 
                     @Override

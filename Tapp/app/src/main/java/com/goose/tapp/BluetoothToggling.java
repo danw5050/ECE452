@@ -13,7 +13,6 @@ public class BluetoothToggling extends AppCompatActivity implements Strategy {
     @Override
     public void doTheSpecifiedTask(Context context, Map<String, Object> settings) {
         Boolean status = false;
-        int REQUEST_ENABLE_BT = 1;
 
         for(Map.Entry<String, Object>entry : settings.entrySet()){
             if(entry.getKey().equals("bluetooth")){
