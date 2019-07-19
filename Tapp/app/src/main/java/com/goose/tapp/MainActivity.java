@@ -17,6 +17,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.NonNull;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 
@@ -67,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         nfcListRecyclerView = findViewById(R.id.nfcListListView);
-        Button logout = findViewById(R.id.logout);
         Button addNewTag = findViewById(R.id.addNewTag);
-        Button scanQRCode = findViewById(R.id.scanQRCode);
         mainActivityRootView = findViewById(R.id.mainActivityRootView);
 
 
@@ -110,15 +112,6 @@ public class MainActivity extends AppCompatActivity {
             nfcError(getApplicationContext().getString(R.string.nfc_disabled));
         }
 
-        // Setup on click listeners
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Sign the user out
-                auth.signOut();
-            }
-        });
-
         addNewTag.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,14 +120,25 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
 
-        scanQRCode.setOnClickListener( new View.OnClickListener() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, QRCodeScannerActivity.class);
-                MainActivity.this.startActivity(myIntent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        //in home already - do nothing
+                        break;
+                    case R.id.action_scanQR:
+                        Intent intent_scan = new Intent(MainActivity.this, QRCodeScannerActivity.class);
+                        MainActivity.this.startActivity(intent_scan);
+                        break;
+                    case R.id.action_logout:
+                        auth.signOut();
+                        break;
+                }
+                return true;
             }
         });
-
 
         //Show all nfc tags belonging to user
         nfcListRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
