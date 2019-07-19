@@ -11,10 +11,6 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
-/**
- * Created by Juned on 4/15/2017.
- */
-
 public class ApkInfoExtractor {
 
     Context context1;
