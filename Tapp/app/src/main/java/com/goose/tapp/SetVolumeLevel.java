@@ -1,7 +1,10 @@
 package com.goose.tapp;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.Map;
@@ -20,14 +23,26 @@ public class SetVolumeLevel extends AppCompatActivity implements Strategy {
         AudioManager am;
         am= (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        // Reference: https://stackoverflow.com/questions/11699603/is-it-possible-to-turn-off-the-silent-mode-programmatically-in-android
-        if(mute){
-            //For Silent mode
-            am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !notificationManager.isNotificationPolicyAccessGranted()) {
+            Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
-        else{
-            //For Normal mode
-            am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+
+        // Reference: https://stackoverflow.com/questions/11699603/is-it-possible-to-turn-off-the-silent-mode-programmatically-in-android
+        if(am != null && notificationManager.isNotificationPolicyAccessGranted()){
+            if(mute){
+                //For Silent mode
+                am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                am.setStreamVolume(AudioManager.STREAM_RING, 0, AudioManager.FLAG_SHOW_UI);
+            }
+            else{
+                //For Normal mode
+                am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                am.setStreamVolume(AudioManager.STREAM_RING, 100, AudioManager.FLAG_PLAY_SOUND);
+            }
         }
     }
 }
