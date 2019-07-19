@@ -50,62 +50,6 @@
             android:textColorHighlight="@android:color/black"
             android:textSize="18sp" />
 
-        <!--Button
-            android:id="@+id/studyTable"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/tagsTitle"
-            android:layout_alignParentEnd="true"
-            android:background="#A6A6A6"
-            android:drawableBottom="?attr/dividerHorizontal"
-            android:fontFamily="sans-serif-black"
-            android:paddingLeft="25dp"
-            android:layout_marginBottom="20dp"
-            android:text="Study Table"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textColorHighlight="@android:color/black"
-            android:textSize="18sp" />
-
-
-        <Button
-            android:id="@+id/workTable"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/studyTable"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="20dp"
-            android:background="#A6A6A6"
-            android:drawableBottom="?attr/dividerHorizontal"
-            android:fontFamily="sans-serif-black"
-            android:paddingLeft="25dp"
-            android:text="Work Table"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textColorHighlight="@android:color/black"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/bedroomTable"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/workTable"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="20dp"
-            android:background="#A6A6A6"
-            android:drawableBottom="?attr/dividerHorizontal"
-            android:fontFamily="sans-serif-black"
-            android:paddingLeft="25dp"
-            android:text="Bedroom Table"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textColorHighlight="@android:color/black"
-            android:textSize="18sp" /-->
-
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/nfcListListView"
             android:layout_width="match_parent"
