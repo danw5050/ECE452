@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.WindowManager;
 
 import java.util.Map;
 
@@ -26,7 +24,6 @@ public class ScreenBrightness  extends AppCompatActivity implements Strategy {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.System.canWrite(context)) {
-                Log.d("iamhere","lol");
                 ContentResolver cResolver = context.getContentResolver();
                 Settings.System.putInt(cResolver, Settings.System.SCREEN_BRIGHTNESS, value);
 

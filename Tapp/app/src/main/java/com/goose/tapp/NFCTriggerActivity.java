@@ -81,6 +81,8 @@ public class NFCTriggerActivity extends AppCompatActivity {
     private void workWithNFCId(String nfcTriggerMessage){
         // Get the NFC ID from the client.
         String nfcId = nfcTriggerMessage;
+        // Check if the NFC ID exists in the database first
+
         // Read data from the database
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
