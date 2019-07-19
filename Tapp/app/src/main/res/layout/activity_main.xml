@@ -119,13 +119,13 @@
 
         <Button
             android:id="@+id/addNewTag"
-            android:layout_above="@id/scanQRCode"
+            android:layout_above="@id/navigation"
             android:layout_width="match_parent"
 
             android:layout_height="64dp"
             android:layout_marginLeft="85dp"
             android:layout_marginRight="85dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="100dp"
 
             android:background="@android:color/black"
             android:text="@string/new_tag"
@@ -133,19 +133,5 @@
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/scanQRCode"
-            android:layout_above="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Scan QR Code"/>
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_above="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout (Temporary location - can fix how this looks?)"/>
 
 </RelativeLayout>
