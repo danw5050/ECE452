@@ -18,20 +18,20 @@ public class BluetoothToggling extends AppCompatActivity implements Strategy {
             if(entry.getKey().equals("bluetooth")){
                 String [] separated = entry.getValue().toString().split("=");
                 status = Boolean.parseBoolean(separated[1].substring(0, separated[1].length() - 1));
-            }
-        }
 
-        if(status){
-            BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (mBluetoothAdapter == null) {
-                // Device does not support Bluetooth, show toast message
-                return;
-            }
-            // Enable bluetooth
-            if (!mBluetoothAdapter.isEnabled()) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                enableBtIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(enableBtIntent);
+                if(status){
+                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    if (mBluetoothAdapter == null) {
+                        // Device does not support Bluetooth, show toast message
+                        return;
+                    }
+                    // Enable bluetooth
+                    if (!mBluetoothAdapter.isEnabled()) {
+                        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                        enableBtIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(enableBtIntent);
+                    }
+                }
             }
         }
     }

@@ -81,16 +81,15 @@ public class NFCTriggerActivity extends AppCompatActivity {
     private void workWithNFCId(String nfcTriggerMessage){
         // Get the NFC ID from the client.
         String nfcId = nfcTriggerMessage;
-        // Check if the NFC ID exists in the database first
 
         // Read data from the database in Firebase
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
                 .child(nfcId)
-                .child("settings")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        // NFC ID doesn't exist itself.
                         if(dataSnapshot.getValue() == null){
                             Toast.makeText(openContext,"This NFC has not been registered with our systems yet.",Toast.LENGTH_SHORT).show();
 
@@ -101,7 +100,13 @@ public class NFCTriggerActivity extends AppCompatActivity {
                             return;
                         }
 
-                        Map<String, Object> settings = (Map<String, Object>) dataSnapshot.getValue();
+                        Map<String, Object> settings = (Map<String, Object>) dataSnapshot.child("settings").getValue();
+
+                        // No settings object exists.
+                        if(settings == null){
+                            Toast.makeText(openContext,"Add some tasks to this NFC!",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
                         ContextObject contextObject = new ContextObject(new wifiToggling());
                         contextObject.executeStrategy(openContext, settings);
@@ -118,8 +123,8 @@ public class NFCTriggerActivity extends AppCompatActivity {
                         contextObject = new ContextObject(new OpenExternalApplication());
                         contextObject.executeStrategy(openContext, settings);
 
-                        contextObject = new ContextObject(new PortraitModeToggling());
-                        contextObject.executeStrategy(openContext, settings);
+                        //contextObject = new ContextObject(new PortraitModeToggling());
+                        //contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new ScreenBrightness());
                         contextObject.executeStrategy(openContext, settings);

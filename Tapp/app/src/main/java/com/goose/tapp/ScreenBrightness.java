@@ -19,19 +19,19 @@ public class ScreenBrightness  extends AppCompatActivity implements Strategy {
             if(entry.getKey().equals("brightness")){
                 String [] separated = entry.getValue().toString().split("=");
                 value = Integer.parseInt(separated[1].substring(0, separated[1].length() - 1));
-            }
-        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Settings.System.canWrite(context)) {
-                ContentResolver cResolver = context.getContentResolver();
-                Settings.System.putInt(cResolver, Settings.System.SCREEN_BRIGHTNESS, value);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Settings.System.canWrite(context)) {
+                        ContentResolver cResolver = context.getContentResolver();
+                        Settings.System.putInt(cResolver, Settings.System.SCREEN_BRIGHTNESS, value);
 
-            } else {
-                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
-                intent.setData(Uri.parse("package:" + context.getPackageName()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                        intent.setData(Uri.parse("package:" + context.getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                }
             }
         }
     }
