@@ -72,7 +72,8 @@
             android:background="@null"
             android:text="@string/forgot_password"
             android:textAllCaps="false"
-            android:textColor="@color/bg_register" />
+            android:textStyle="bold"
+            android:textColor="@color/white" />
 
         <!-- Link to Login Screen -->
 
