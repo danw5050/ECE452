@@ -17,14 +17,13 @@ public class PortraitModeToggling  extends AppCompatActivity implements Strategy
             if(entry.getKey().equals("portrait")){
                 String [] separated = entry.getValue().toString().split("=");
                 status = Boolean.parseBoolean(separated[1].substring(0, separated[1].length() - 1));
+                if(status){
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+                else{
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
             }
-        }
-
-        if(status){
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else{
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
 }

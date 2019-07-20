@@ -19,19 +19,19 @@ public class OpenExternalApplication extends AppCompatActivity implements  Strat
             if(entry.getKey().equals("application")){
                 String [] separated = entry.getValue().toString().split("=");
                 application = separated[1].substring(0, separated[1].length() - 1);
+
+                if(application == null || application.length() == 0 || application.isEmpty()){
+                    return;
+                }
+
+                try{
+                    Intent intent = context.getPackageManager().getLaunchIntentForPackage(application);
+                    context.startActivity(intent);
+                }
+                catch (Exception ex){
+                    // Show a toast message
+                }
             }
-        }
-
-        if(application == null || application.length() == 0 || application.isEmpty()){
-            return;
-        }
-
-        try{
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(application);
-            context.startActivity(intent);
-        }
-        catch (Exception ex){
-            // Show a toast message
         }
     }
 }

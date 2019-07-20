@@ -16,16 +16,16 @@ public class StudyFeature extends AppCompatActivity implements Strategy {
         Boolean status = false;
 
         for(Map.Entry<String, Object>entry : settings.entrySet()){
-            if(entry.getKey().equals("StudyECE452")){
+            if(entry.getKey().equals("studyECE452")){
                 String [] separated = entry.getValue().toString().split("=");
                 status = Boolean.parseBoolean(separated[1].substring(0, separated[1].length() - 1));
-            }
-        }
 
-        if(status){
-            Intent myIntent = new Intent(context, StudyFeaturesActivity.class);
-            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(myIntent);
+                if(status){
+                    Intent myIntent = new Intent(context, StudyFeaturesActivity.class);
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(myIntent);
+                }
+            }
         }
     }
 }
