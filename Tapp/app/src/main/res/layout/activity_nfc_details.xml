@@ -26,6 +26,8 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             android:background="#A6A6A6"
+            app:itemIconTint="@drawable/bottom_navigation_color_selector"
+            app:itemTextColor="@drawable/bottom_navigation_color_selector"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
