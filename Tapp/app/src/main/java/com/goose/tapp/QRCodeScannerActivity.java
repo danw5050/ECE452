@@ -134,10 +134,23 @@ public class QRCodeScannerActivity  extends AppCompatActivity {
                             //Create vibrate
                             Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(1000);
-                            // Get the value of QR code
-                            qrCodeValue = qrcodes.valueAt(0).displayValue;
-                            txtResult.setText(qrCodeValue);
-                            addQRNFC.setEnabled(true);
+
+                            // Get the value of QR code and its name
+                            String readValue = qrcodes.valueAt(0).displayValue;
+                            int sepeatorIndex = readValue.indexOf(getApplicationContext().getResources().getString(R.string.qrCodeGeneratorSeperator));
+
+                            // Not valid NFC qr code
+                            if (sepeatorIndex == -1) {
+                                addQRNFC.setEnabled(false);
+                                txtResult.setText("Not Valid Tapp QR Code");
+                            } else {
+                                // Valid NFC qr code
+                                qrCodeValue = readValue.substring(0, sepeatorIndex);
+                                String qrCodeName = readValue.substring(sepeatorIndex + 1);
+
+                                txtResult.setText(qrCodeName);
+                                addQRNFC.setEnabled(true);
+                            }
                         }
                     });
                 }

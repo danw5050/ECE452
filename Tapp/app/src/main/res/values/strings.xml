@@ -62,4 +62,7 @@
     <string name="saveNFC">Save NFC</string>
     <string name="taskList">Tasks</string>
     <string name="title_activity_study_features">StudyFeaturesActivity</string>
+
+    <!-- MISC -->
+    <string name="qrCodeGeneratorSeperator">`</string>
 </resources>
