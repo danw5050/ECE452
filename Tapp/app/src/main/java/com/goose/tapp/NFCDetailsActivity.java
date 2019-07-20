@@ -11,9 +11,17 @@ import android.widget.CheckBox;
 import android.preference.PreferenceManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class NFCDetailsActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;
+    public static FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,34 @@ public class NFCDetailsActivity extends AppCompatActivity {
         TextView nfcTitle = findViewById(R.id.nfcTitle);
         Button showQRCode = findViewById(R.id.showQRCode);
         getSupportActionBar().hide();
+
+        auth = FirebaseAuth.getInstance();
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent intent_home = new Intent(NFCDetailsActivity.this, MainActivity.class);
+                        NFCDetailsActivity.this.startActivity(intent_home);
+                        break;
+                    case R.id.action_scanQR:
+                        Intent intent_scan = new Intent(NFCDetailsActivity.this, QRCodeScannerActivity.class);
+                        NFCDetailsActivity.this.startActivity(intent_scan);
+                        break;
+                    case R.id.action_logout:
+                        auth.signOut();
+                        user = auth.getCurrentUser();
+                        if (user == null) {
+                            startActivity(new Intent(NFCDetailsActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
         // Get the nfcDetails to populate activity
         final NFCDetails nfcDetails = (NFCDetails)getIntent().getSerializableExtra("NFC_DETAILS");
