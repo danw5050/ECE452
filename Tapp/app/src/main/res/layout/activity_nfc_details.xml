@@ -31,6 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/navigation_menu" />
 
+
         <ImageView
             android:id="@+id/banner"
             android:layout_width="match_parent"
@@ -40,7 +41,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/tapp_banner" />
+            android:src="@drawable/tapp_banner"
+            />
 
 
         <TextView
@@ -51,7 +53,6 @@
             android:layout_marginBottom="20dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="25dp"
             android:gravity="center"
             android:fontFamily="sans-serif-black"
             android:text="Populate NFC Title"
@@ -59,39 +60,25 @@
             android:textColorHighlight="@android:color/black"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tasksTitle"
+
+
+        <CheckBox
+            android:id="@+id/browserOpener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nfcTitle"
             android:layout_marginBottom="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="25dp"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center"
-            android:text="Study Table - Triggered Tasks:"
-            android:textColor="@android:color/black"
-            android:textColorHighlight="@android:color/black"
-            android:textSize="20sp" />
-
-        <CheckBox
-            android:id="@+id/UWlearn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tasksTitle"
-            android:layout_marginBottom="20dp"
             android:layout_alignParentLeft="true"
-            android:text="Open UW Learn"
+            android:text="Open Browser"
             android:textColor="@android:color/black"
             android:onClick="onCheckboxClicked"
             android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/silentMode"
+            android:id="@+id/wifiOpener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/UWlearn"
+            android:layout_below="@+id/browserOpener"
             android:layout_alignParentLeft="true"
             android:text="Turn on WiFi"
             android:layout_marginBottom="20dp"
@@ -100,12 +87,12 @@
             android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/spotifyOpener"
+            android:id="@+id/studyECE452"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/silentMode"
+            android:layout_below="@+id/wifiOpener"
             android:layout_alignParentLeft="true"
-            android:text="Open Spotify"
+            android:text="Review ECE452"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
             android:onClick="onCheckboxClicked3"
@@ -115,7 +102,7 @@
             android:id="@+id/bluetoothOpener"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/spotifyOpener"
+            android:layout_below="@+id/studyECE452"
             android:layout_alignParentLeft="true"
             android:text="Open Bluetooth"
             android:layout_marginBottom="20dp"
@@ -124,25 +111,60 @@
             android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/clockopener"
+            android:id="@+id/volumeEditor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bluetoothOpener"
             android:layout_alignParentLeft="true"
-            android:text="Open Clock"
+            android:text="Mute your volume"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
             android:onClick="onCheckboxClicked5"
             android:textSize="18sp" />
 
+        <CheckBox
+            android:id="@+id/applicationopener"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/volumeEditor"
+            android:layout_alignParentLeft="true"
+            android:text="Open External Application"
+            android:layout_marginBottom="20dp"
+            android:textColor="@android:color/black"
+            android:onClick="onCheckboxClicked6"
+            android:textSize="18sp" />
+
+        <CheckBox
+        android:id="@+id/brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/applicationopener"
+        android:layout_alignParentLeft="true"
+        android:text="Increase Phone Brightness"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black"
+        android:onClick="onCheckboxClicked7"
+        android:textSize="18sp" />
+
+        <CheckBox
+        android:id="@+id/potraitMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/brightness"
+        android:layout_alignParentLeft="true"
+        android:text="Open Potrait Mode"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black"
+        android:onClick="onCheckboxClicked8"
+        android:textSize="18sp" />
 
         <Button
             android:id="@+id/showQRCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/darker_gray"
             android:layout_marginBottom="100dp"
+            android:background="@android:color/darker_gray"
             android:text="Generate QR Code"/>
 
         <!--android:layout_below="@+id/OpenSpotify"-->
