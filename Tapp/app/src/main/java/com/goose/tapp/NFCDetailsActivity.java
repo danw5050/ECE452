@@ -22,6 +22,7 @@ import com.goose.tapp.NFCDetails.Brightness;
 import com.goose.tapp.NFCDetails.Browser;
 import com.goose.tapp.NFCDetails.NFCDetails;
 import com.goose.tapp.NFCDetails.Portrait;
+import com.goose.tapp.NFCDetails.Settings;
 import com.goose.tapp.NFCDetails.StudyECE452;
 import com.goose.tapp.NFCDetails.Volume;
 import com.goose.tapp.NFCDetails.Wifi;
@@ -86,7 +87,10 @@ public class NFCDetailsActivity extends AppCompatActivity {
         if (nfcDetails == null ) {
             Log.e("NFCDetailsActivity", "Failed to get NFC Details - NFC_DETAILS is empty");
             return;
-        } else if(nfcDetails != null && nfcDetails.getSettings() != null){
+        }
+        else if (nfcDetails.getSettings() == null) {
+            nfcDetails.setSettings( new Settings());
+        } else {
             browserOpener.setChecked(nfcDetails.getSettings().getBrowser() != null);
             wifiOpener.setChecked(nfcDetails.getSettings().getWifi() != null);
             studyECE452.setChecked(nfcDetails.getSettings().getStudyECE452() != null);
