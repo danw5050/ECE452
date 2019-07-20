@@ -60,9 +60,18 @@
             </intent-filter
             -->
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".NFCWriteActivity"></activity>
         <activity android:name=".QRCodeGenerationActivity"></activity>
         <activity android:name=".NFCDetailsActivity"></activity>
