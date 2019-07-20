@@ -17,8 +17,11 @@ public class OpenExternalApplication extends AppCompatActivity implements  Strat
         String application = "";
         for(Map.Entry<String, Object>entry : settings.entrySet()){
             if(entry.getKey().equals("application")){
-                String [] separated = entry.getValue().toString().split("=");
-                application = separated[1].substring(0, separated[1].length() - 1);
+                String [] separated = entry.getValue().toString().split("appPackage");
+                String [] separated2 = separated[1].split("=");
+                String str1 = separated2[1].substring(0, separated2[1].length() - 1);
+                String [] separated3 =  str1.split(",");
+                application =  separated3[0];
 
                 if(application == null || application.length() == 0 || application.isEmpty()){
                     return;
