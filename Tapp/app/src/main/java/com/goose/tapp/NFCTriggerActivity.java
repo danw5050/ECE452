@@ -33,7 +33,7 @@ public class NFCTriggerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up the activity
+        // Set up the activityNFCActionTextView
         setContentView(R.layout.activity_nfc_trigger);
         // NFCActionTextView = findViewById(R.id.NFCActionTextView);
 
