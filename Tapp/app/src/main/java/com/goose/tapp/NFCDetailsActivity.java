@@ -112,7 +112,10 @@ public class NFCDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Show QR Code for NFC Tag to share
                 Intent myIntent = new Intent(NFCDetailsActivity.this, QRCodeGenerationActivity.class);
-                myIntent.putExtra("EXTRA_QR_STRING", nfcDetails.getNfcID());
+                String tempString = nfcDetails.getNfcID()
+                        + getApplicationContext().getResources().getString(R.string.qrCodeGeneratorSeperator)
+                        + nfcDetails.getName();
+                myIntent.putExtra("EXTRA_QR_STRING", tempString);
                 NFCDetailsActivity.this.startActivity(myIntent);
             }
         });
