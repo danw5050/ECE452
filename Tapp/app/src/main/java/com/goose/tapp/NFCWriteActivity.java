@@ -31,6 +31,7 @@ public class NFCWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_write);
         writingStatus = findViewById(R.id.writingStatus);
+        getSupportActionBar().hide();
 
         // Get the string from activity launching intent
         String nfcValue = getIntent().getStringExtra("EXTRA_NFC_STRING");
