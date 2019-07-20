@@ -71,34 +71,29 @@ public class NFCDetailsActivity extends AppCompatActivity {
             }
         });
 
+        // Set up checkbox
+        CheckBox browserOpener =  findViewById (R.id.browserOpener);
+        CheckBox wifiOpener = findViewById(R.id.wifiOpener);
+        CheckBox studyECE452 = findViewById(R.id.studyECE452);
+        CheckBox bluetoothOpener = findViewById(R.id.bluetoothOpener);
+        CheckBox volumeEditor = findViewById(R.id.volumeEditor);
+        CheckBox applicationopener = findViewById(R.id.applicationopener);
+        CheckBox brightness = findViewById(R.id.brightness);
+        CheckBox potraitMode = findViewById(R.id.potraitMode);
+
         // Get the nfcDetails to populate activity
         nfcDetails = (NFCDetails)getIntent().getSerializableExtra("NFC_DETAILS");
         if (nfcDetails == null ) {
             Log.e("NFCDetailsActivity", "Failed to get NFC Details - NFC_DETAILS is empty");
             return;
-        } else if(nfcDetails != null){
-            CheckBox browserOpener =  findViewById (R.id.browserOpener);
+        } else if(nfcDetails != null && nfcDetails.getSettings() != null){
             browserOpener.setChecked(nfcDetails.getSettings().getBrowser() != null);
-
-            CheckBox wifiOpener = findViewById(R.id.wifiOpener);
             wifiOpener.setChecked(nfcDetails.getSettings().getWifi() != null);
-
-            CheckBox studyECE452 = findViewById(R.id.studyECE452);
             studyECE452.setChecked(nfcDetails.getSettings().getStudyECE452() != null);
-
-            CheckBox bluetoothOpener = findViewById(R.id.bluetoothOpener);
             bluetoothOpener.setChecked(nfcDetails.getSettings().getBluetooth() != null);
-
-            CheckBox volumeEditor = findViewById(R.id.volumeEditor);
             volumeEditor.setChecked(nfcDetails.getSettings().getVolume() != null);
-
-            CheckBox applicationopener = findViewById(R.id.applicationopener);
             applicationopener.setChecked(nfcDetails.getSettings().getApplication() != null);
-
-            CheckBox brightness = findViewById(R.id.brightness);
             brightness.setChecked(nfcDetails.getSettings().getBrightness() != null);
-
-            CheckBox potraitMode = findViewById(R.id.potraitMode);
             potraitMode.setChecked(nfcDetails.getSettings().getPortrait() != null);
         }
 
