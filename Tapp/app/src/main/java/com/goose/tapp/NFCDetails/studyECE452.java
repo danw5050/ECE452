@@ -2,7 +2,7 @@ package com.goose.tapp.NFCDetails;
 
 import java.io.Serializable;
 
-public class studyECE452 implements Serializable {
+public class StudyECE452 implements Serializable {
     private boolean status;
 
     public void setStatus(boolean status) {

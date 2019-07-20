@@ -8,7 +8,7 @@ public class Settings implements Serializable {
     private Brightness brightness;
     private Browser browser;
     private Portrait portrait;
-    private com.goose.tapp.NFCDetails.studyECE452 studyECE452;
+    private StudyECE452 studyECE452;
     private Volume volume;
     private Wifi wifi;
 
@@ -52,11 +52,11 @@ public class Settings implements Serializable {
         this.portrait = portrait;
     }
 
-    public com.goose.tapp.NFCDetails.studyECE452 getStudyECE452() {
+    public StudyECE452 getStudyECE452() {
         return studyECE452;
     }
 
-    public void setStudyECE452(com.goose.tapp.NFCDetails.studyECE452 studyECE452) {
+    public void setStudyECE452(StudyECE452 studyECE452) {
         this.studyECE452 = studyECE452;
     }
 

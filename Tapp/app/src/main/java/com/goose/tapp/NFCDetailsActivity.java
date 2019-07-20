@@ -14,12 +14,24 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.goose.tapp.NFCDetails.Application;
+import com.goose.tapp.NFCDetails.Bluetooth;
+import com.goose.tapp.NFCDetails.Brightness;
+import com.goose.tapp.NFCDetails.Browser;
 import com.goose.tapp.NFCDetails.NFCDetails;
+import com.goose.tapp.NFCDetails.Portrait;
+import com.goose.tapp.NFCDetails.StudyECE452;
+import com.goose.tapp.NFCDetails.Volume;
+import com.goose.tapp.NFCDetails.Wifi;
 
 public class NFCDetailsActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     public static FirebaseUser user;
+    private NFCDetails nfcDetails;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,55 +72,40 @@ public class NFCDetailsActivity extends AppCompatActivity {
         });
 
         // Get the nfcDetails to populate activity
-        final NFCDetails nfcDetails = (NFCDetails)getIntent().getSerializableExtra("NFC_DETAILS");
+        nfcDetails = (NFCDetails)getIntent().getSerializableExtra("NFC_DETAILS");
         if (nfcDetails == null ) {
             Log.e("NFCDetailsActivity", "Failed to get NFC Details - NFC_DETAILS is empty");
             return;
         } else if(nfcDetails != null){
             CheckBox browserOpener =  findViewById (R.id.browserOpener);
-          /*  boolean checked = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox1", false);
-            browserOpener.setChecked(checked);*/
+            browserOpener.setChecked(nfcDetails.getSettings().getBrowser() != null);
 
             CheckBox wifiOpener = findViewById(R.id.wifiOpener);
-           /* boolean checked2 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox2", false);
-            wifiOpener.setChecked(checked2);*/
+            wifiOpener.setChecked(nfcDetails.getSettings().getWifi() != null);
 
             CheckBox studyECE452 = findViewById(R.id.studyECE452);
-          /*  boolean checked3 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox3", false);
-            studyECE452.setChecked(checked3);*/
+            studyECE452.setChecked(nfcDetails.getSettings().getStudyECE452() != null);
 
             CheckBox bluetoothOpener = findViewById(R.id.bluetoothOpener);
-           /* boolean checked4 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox4", false);
-            bluetoothOpener.setChecked(checked4);*/
+            bluetoothOpener.setChecked(nfcDetails.getSettings().getBluetooth() != null);
 
             CheckBox volumeEditor = findViewById(R.id.volumeEditor);
-          /*  boolean checked5 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox5", false);
-            volumeEditor.setChecked(checked5);*/
+            volumeEditor.setChecked(nfcDetails.getSettings().getVolume() != null);
 
             CheckBox applicationopener = findViewById(R.id.applicationopener);
-           /* boolean checked6 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox6", false);
-            applicationopener.setChecked(checked6);*/
+            applicationopener.setChecked(nfcDetails.getSettings().getApplication() != null);
 
             CheckBox brightness = findViewById(R.id.brightness);
-          /*  boolean checked7 = PreferenceManager.getDefaultSharedPreferences(this)
-                    .getBoolean("checkBox7", false);
-           brightness.setChecked(checked7);*/
+            brightness.setChecked(nfcDetails.getSettings().getBrightness() != null);
 
             CheckBox potraitMode = findViewById(R.id.potraitMode);
-            /*  boolean checked8 = PreferenceManager.getDefaultSharedPreferences(this)
-                  .getBoolean("checkBox8", false);
-          potraitMode.setChecked(checked8);*/
+            potraitMode.setChecked(nfcDetails.getSettings().getPortrait() != null);
         }
 
         // Populate activity with nfcDetails
         nfcTitle.setText(nfcDetails.getTagLocation());
 
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         // Add onClickListeners
         showQRCode.setOnClickListener(new View.OnClickListener() {
@@ -125,97 +122,245 @@ public class NFCDetailsActivity extends AppCompatActivity {
 
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.browserOpener:
-             /*   PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox1", checked).commit();*/
+                if (checked) {
+                    TextModal object = new TextModal(NFCDetailsActivity.this, "Browser Link", "ex: google.ca", "");
+                    object.setTextModalListener(new TextModal.TextModalListener() {
+                        @Override
+                        public void modalResponse(String text) {
+                            Browser browser = new Browser();
+                            browser.setLink(text);
+                            nfcDetails.getSettings().setBrowser(browser);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setBrowser(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked2(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.wifiOpener:
-               /* PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox2", checked).commit();*/
+                if (checked) {
+                    CheckBoxModal object = new CheckBoxModal(NFCDetailsActivity.this, "Wifi", "Enable Wifi", false);
+                    object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+                        @Override
+                        public void modalResponse( Boolean status){
+                            Wifi wifi = new Wifi();
+                            wifi.setStatus(status);
+                            nfcDetails.getSettings().setWifi(wifi);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setWifi(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked3(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.studyECE452:
-               /* PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox3", checked).commit();*/
+                if (checked) {
+                    CheckBoxModal object = new CheckBoxModal(NFCDetailsActivity.this, "Pop Quiz!", "Enable ECE452 Question", false);
+                    object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+                        @Override
+                        public void modalResponse( Boolean status){
+                            StudyECE452 studyECE452 = new StudyECE452();
+                            studyECE452.setStatus(status);
+                            nfcDetails.getSettings().setStudyECE452(studyECE452);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setStudyECE452(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked4(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.bluetoothOpener:
-             /*   PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox4", checked).commit();*/
+                if (checked) {
+                    CheckBoxModal object = new CheckBoxModal(NFCDetailsActivity.this, "Bluetooth", "Enable Bluetooth", false);
+                    object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+                        @Override
+                        public void modalResponse( Boolean status){
+                            Bluetooth bluetooth = new Bluetooth();
+                            bluetooth.setStatus(status);
+                            nfcDetails.getSettings().setBluetooth(bluetooth);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setBluetooth(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked5(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.volumeEditor:
-              /*  PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox5", checked).commit();*/
+                if (checked) {
+                    CheckBoxModal object = new CheckBoxModal(NFCDetailsActivity.this, "Volume", "Volume Mute", false);
+                    object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+                        @Override
+                        public void modalResponse( Boolean status){
+                            Volume volume = new Volume();
+                            volume.setMute(status);
+                            nfcDetails.getSettings().setVolume(volume);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setVolume(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked6(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.applicationopener:
-               /* PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox6", checked).commit();*/
+                if (checked) {
+                    AppsModal object = new AppsModal(NFCDetailsActivity.this, "Select app to open");
+                    object.setAppsModalListener(new AppsModal.AppsModalListener() {
+                        @Override
+                        public void modalResponse( String  appName, String packageName){
+                            Application application = new Application();
+                            application.setAppName(appName);
+                            application.setAppPackage(packageName);
+                            nfcDetails.getSettings().setApplication(application);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setApplication(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked7(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.brightness:
-               /* PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox7", checked).commit();*/
+                if (checked) {
+                    SeekbarModal object = new SeekbarModal(NFCDetailsActivity.this, "Brightness", 0);
+                    object.setSeekbarModalListener(new SeekbarModal.SeekbarModalListener() {
+                        @Override
+                        public void modalResponse( int value){
+                            Brightness brightness = new Brightness();
+                            brightness.setValue(value);
+                            nfcDetails.getSettings().setBrightness(brightness);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setBrightness(null);
+                }
                 break;
         }
     }
 
     public void onCheckboxClicked8(View view) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
+        final CheckBox checkbox = ((CheckBox) view);
+        Boolean checked = checkbox.isChecked();
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.potraitMode:
-             /*   PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean("checkBox8", checked).commit();*/
+                if (checked) {
+                    CheckBoxModal object = new CheckBoxModal(NFCDetailsActivity.this, "Portrait", "Portrait Mode Enabled", false);
+                    object.setCheckBoxModalListener(new CheckBoxModal.CheckBoxModalListener() {
+                        @Override
+                        public void modalResponse( Boolean status){
+                            Portrait portrait = new Portrait();
+                            portrait.setStatus(status);
+                            nfcDetails.getSettings().setPortrait(portrait);
+                        }
+
+                        @Override
+                        public void modalCancel() {
+                            checkbox.setChecked(false);
+                        }
+                    });
+                } else {
+                    nfcDetails.getSettings().setPortrait(null);
+                }
                 break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        updateFirebase();
+
+    }
+
+    public void updateFirebase() {
+        databaseReference.child("NFCIds").child(nfcDetails.getNfcID()).child("settings").setValue(nfcDetails.getSettings());
     }
 }
