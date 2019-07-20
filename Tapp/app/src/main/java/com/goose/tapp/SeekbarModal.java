@@ -17,7 +17,7 @@ public class SeekbarModal {
 
         // Set up the text input
         final SeekBar input = new SeekBar(context);
-        input.setMax(100);
+        input.setMax(255);
         input.setProgress(initialState);
         builder.setView(input);
 

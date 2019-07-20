@@ -1,4 +1,4 @@
-package com.goose.tapp;
+package com.goose.tapp.NFCDetails;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ public class NFCDetails implements Serializable {
     private String nfcID;
     private String name;
     private String tagLocation;
+    private Settings settings;
 
     public NFCDetails() { }
 
@@ -32,5 +33,13 @@ public class NFCDetails implements Serializable {
 
     public void setTagLocation(String tagLocation) {
         this.tagLocation = tagLocation;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 }

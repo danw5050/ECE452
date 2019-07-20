@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.goose.tapp.NFCDetails.NFCDetails;
+
 import java.util.List;
 
 public class UsersNFCListRecyclerViewAdapter extends RecyclerView.Adapter<UsersNFCListRecyclerViewAdapter.ViewHolder> {
