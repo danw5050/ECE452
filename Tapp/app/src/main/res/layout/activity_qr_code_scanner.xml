@@ -14,12 +14,12 @@
         android:layout_marginRight="0dp"
         android:src="@drawable/tapp_banner"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <SurfaceView
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_below="@+id/banner"
         android:layout_centerInParent="true" />
 
