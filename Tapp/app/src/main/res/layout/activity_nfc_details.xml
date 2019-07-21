@@ -68,7 +68,8 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_below="@+id/nfcTitle"
-        android:layout_above="@+id/showQRCode">
+        android:layout_above="@+id/showQRCode"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
