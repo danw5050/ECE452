@@ -86,17 +86,18 @@ public class NFCTriggerActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference()
                 .child("NFCIds")
                 .child(nfcId)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // NFC ID doesn't exist itself.
-                        if(dataSnapshot.getValue() == null){
+                        if(dataSnapshot == null || dataSnapshot.getValue() == null){
                             Toast.makeText(openContext,"This NFC has not been registered with our systems yet.",Toast.LENGTH_SHORT).show();
 
                             Intent myIntent = new Intent(openContext, NewNFCActivity.class);
                             myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             openContext.startActivity(myIntent);
 
+                            finish();
                             return;
                         }
 
@@ -105,6 +106,7 @@ public class NFCTriggerActivity extends AppCompatActivity {
                         // No settings object exists.
                         if(settings == null){
                             Toast.makeText(openContext,"Add some tasks to this NFC!",Toast.LENGTH_SHORT).show();
+                            finish();
                             return;
                         }
 
@@ -123,14 +125,17 @@ public class NFCTriggerActivity extends AppCompatActivity {
                         contextObject = new ContextObject(new OpenExternalApplication());
                         contextObject.executeStrategy(openContext, settings);
 
-                        //contextObject = new ContextObject(new PortraitModeToggling());
-                        //contextObject.executeStrategy(openContext, settings);
+                        contextObject = new ContextObject(new PortraitModeToggling());
+                        contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new ScreenBrightness());
                         contextObject.executeStrategy(openContext, settings);
 
                         contextObject = new ContextObject(new StudyFeature());
                         contextObject.executeStrategy(openContext, settings);
+
+                        finish();
+                        return;
                     }
 
                     @Override
